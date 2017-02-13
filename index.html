@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-
+    <title>earth chat</title>
     <link rel="stylesheet/less" type="text/css" href="style.less">
     <script src='less.min.js'></script>
+    <script src="jquery3.1.1.min.js"></script>
 </head>
 
 <body>
@@ -30,7 +31,32 @@
             </filter>
         </defs>
     </svg>
-    <!--<svg id="dialog"></svg>-->
+    <div id="resizeBig">
+        <div id="close">
+            <p class='close'> × </p>
+        </div>
+        <img class='avator' width='150px' height='150px'>
+        <div class="desc">
+            <ul>
+                <li>
+                    <dt>姓名:</dt>
+                    <dd>叶玉国</dd>
+                </li>
+                <li>
+                    <dt>年龄:</dt>
+                    <dd>22</dd>
+                </li>
+                <li>
+                    <dt>学校:</dt>
+                    <dd>不告诉你</dd>
+                </li>
+                <li>
+                    <dt>现居地:</dt>
+                    <dd>北京</dd>
+                </li>
+            </ul>
+        </div>
+    </div>
     <script src="d3.custom.js"></script>
     <script src="script.js"></script>
 </body>

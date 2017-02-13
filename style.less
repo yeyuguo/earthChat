@@ -1,9 +1,26 @@
+*{
+    margin:0;
+    padding:0;
+}
+@padCommon:5px 10px;
+@borderRadiusCommon: 3% 3%;
+@backGray:#F3F3F5;
+@backGreen:#2CA143;
+
+
 body {
+    font-size: 14px;
     background-color: #444444;
     background-image: -webkit-gradient(linear, left top, right bottom, from(#000), to(#333));
     background-image: -webkit-linear-gradient(left top, #000, #333);
     background-image: -moz-linear-gradient(left top, #000, #333);
     overflow: hidden;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
 }
 
 #info {
@@ -50,9 +67,84 @@ body {
 }
 #dialogBox{
     font-size: 14px;
+    &.Popup{
+        padding:10px;
+        background: #fff;
+    }
+    & rect{
+        padding:5px 10px;
+    }
     & image{
         &:hover{
             cursor: pointer;
+        }
+    }
+}
+
+li{
+    dl{
+        dt,dd{
+            float: left;
+        }
+    }
+}
+
+
+#resizeBig{
+    display: none;
+    border-radius: @borderRadiusCommon;
+    box-shadow: 2px 2px 5px #867f7f;
+    color:#fff;
+    @wid:300px;
+    @hei:300px;
+    position: absolute;
+    // left:50%;
+    // top:50%;
+    left:0;
+    top:0;
+    z-index:99;
+    width: @wid;
+    height: @hei;
+    background:@backGreen;
+    text-align: center;
+    padding:@padCommon;
+    #close{
+        cursor: move;
+        height: 25px;
+    }
+    p.close{
+        float: right;
+        font-size: 20px;
+        cursor: pointer;
+        text-align: right;
+        margin-right: 10px;
+        height: 20px;
+        width: 30px;
+    }
+    & image{
+        z-index: inherit;
+        margin:10px auto;
+    }
+    & .desc{
+        width: 250px;
+        height: 100px;
+        margin: 0 auto;
+        li{
+            float: left;
+            // width: 40%;
+            margin:0 auto;
+            padding:@padCommon;
+            dt{
+                width: 100px;
+            }
+            dd{
+                width: 120px;
+                overflow: hidden;
+            }
+            dt,dd{
+                float: left;    
+            }
+            
         }
     }
 }

@@ -1,4 +1,26 @@
 ;
+/** 
+ * 
+ *----------Dragon be here!----------/ 
+ * 　　　┏┓　　　┏┓ 
+ * 　　┏┛┻━━━┛┻┓ 
+ * 　　┃　　　　　　　┃ 
+ * 　　┃　　　━　　　┃ 
+ * 　　┃　┳┛　┗┳　┃ 
+ * 　　┃　　　　　　　┃ 
+ * 　　┃　　　┻　　　┃ 
+ * 　　┃　　　　　　　┃ 
+ * 　　┗━┓　　　┏━┛ 
+ * 　　　　┃　　　┃神兽保佑 
+ * 　　　　┃　　　┃代码无BUG！ 
+ * 　　　　┃　　　┗━━━┓ 
+ * 　　　　┃　　　　　　　┣┓ 
+ * 　　　　┃　　　　　　　┏┛ 
+ * 　　　　┗┓┓┏━┳┓┏┛ 
+ * 　　　　　┃┫┫　┃┫┫ 
+ * 　　　　　┗┻┛　┗┻┛ 
+ * ━━━━━━神兽出没━━━━━━
+ */
 (function(w, d3, undefined) {
     "use strict";
 
@@ -107,7 +129,8 @@
 
         //Redraw all items with new projections
         function redraw() {
-            markPoint()
+            markPoint([105, 30], '我变化咯')
+
 
             features.attr("d", function(d) {
                 return path(circle.clip(d));
@@ -118,6 +141,7 @@
                 return spacePath(d);
             });
 
+            EventClass.closeAvator()
 
         }
 
@@ -166,9 +190,9 @@
 
 
         // 标记点
-        function markPoint(point) {
+        function markPoint(point, msg) {
             var peking = point || [116.3, 39.9];
-            var textCont = textCont || '这是测试对话'
+            var textCont = msg || '这是测试对话'
             dialogBox = d3.select('#dialogBox')
             var proPeking = projection(peking)
             if (beijingPoint) {
@@ -206,9 +230,10 @@
                 .attr('y', proPeking[1] + 1)
                 .attr('rx', 5)
                 .attr('ry', 5)
+                .attr('fill', 'white')
                 .attr('width', 100)
                 .attr('height', 30)
-                .attr('fill', 'white')
+
 
             textBox = dialogBox.append('text')
                 .attr('class', 'Popup')
@@ -216,8 +241,20 @@
                 .attr('y', proPeking[1] + 20)
                 .html(textCont)
 
-            beijingPoint.on("click", function() {
-                console.log(d3.select(this))
+            picBox.on("click", function() {
+                // console.log(d3.select('#resizeBig img'))
+                // if (d3.select('#resizeBig img')[0][0]) {
+                //     return
+                // }
+                var src = d3.select(this).attr('href')
+                console.log(src)
+
+                d3.select('#resizeBig')
+                    .attr('style', 'display:block')
+
+                d3.select('#resizeBig .avator')
+                    .attr('src', src)
+                    .attr('alt', '头像展示')
             })
         }
         markPoint()
@@ -227,3 +264,111 @@
     getSize();
 
 }(window, d3));
+
+
+
+//  先执行
+var drag
+var EventClass = function() {
+    // drag = d3.behavior.drag()
+
+    // 一次性自执行函数
+    $(function() {
+        $('#resizeBig .close').on('click', function() {
+            closeAvator()
+        })
+    }())
+
+    // 自定义函数
+    // 关闭头像详细页
+    function closeAvator() {
+        if ($('#resizeBig').css('display') != 'none') {
+            $('#resizeBig').css('display', 'none');
+        }
+    }
+
+    // 拖拽移动
+
+    function dragMove(bar, target) {
+        console.log(bar)
+        console.log(target)
+        var params = {
+            left: 0,
+            top: 0,
+            currentX: 0,
+            currentY: 0,
+            flag: false
+        };
+        //获取相关CSS属性
+        var getCss = function(o, key) {
+            return o.currentStyle ? o.currentStyle[key] : document.defaultView.getComputedStyle(o, false)[key];
+        };
+
+        //拖拽的实现
+        var startDrag = function(bar, target, callback) {
+            if (getCss(target, "left") !== "auto") {
+                params.left = getCss(target, "left");
+            }
+            if (getCss(target, "top") !== "auto") {
+                params.top = getCss(target, "top");
+            }
+            //o是移动对象
+            bar.onmousedown = function(event) {
+                params.flag = true;
+                if (!event) {
+                    event = window.event;
+                    //防止IE文字选中
+                    bar.onselectstart = function() {
+                        return false;
+                    }
+                }
+                var e = event;
+                params.currentX = e.clientX;
+                params.currentY = e.clientY;
+            };
+            document.onmouseup = function() {
+                params.flag = false;
+                if (getCss(target, "left") !== "auto") {
+                    params.left = getCss(target, "left");
+                }
+                if (getCss(target, "top") !== "auto") {
+                    params.top = getCss(target, "top");
+                }
+            };
+            document.onmousemove = function(event) {
+                var e = event ? event : window.event;
+                if (params.flag) {
+                    var nowX = e.clientX,
+                        nowY = e.clientY;
+                    var disX = nowX - params.currentX,
+                        disY = nowY - params.currentY;
+                    target.style.left = parseInt(params.left) + disX + "px";
+                    target.style.top = parseInt(params.top) + disY + "px";
+                }
+
+                if (typeof callback == "function") {
+                    // callback(parseInt(params.left) + disX, parseInt(params.top) + disY);
+                    callback()
+                }
+            }
+        }(bar, target);
+    }
+
+    return {
+        result: 'yes',
+        closeAvator: function() {
+            closeAvator()
+        },
+        dragMove: function(bar, target) {
+            return dragMove(bar, target)
+        }
+    }
+}()
+
+
+
+$(function() {
+    var clickSlide = document.getElementById('close')
+    var moveSlide = document.getElementById('resizeBig')
+    EventClass.dragMove(clickSlide, moveSlide)
+})
