@@ -1,0 +1,2 @@
+# earthChat  
+for myself
