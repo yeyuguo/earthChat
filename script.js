@@ -221,7 +221,8 @@
                 .attr("y", proPeking[1] - 30)
                 .attr("width", 35)
                 .attr("height", 35)
-                .attr("xlink:href", "duang/img/user-2.png");
+                // .attr("xlink:href", "duang/img/user-2.png");
+                .attr("xlink:href", "images/meinv.jpg");
 
 
             PopupBox = dialogBox.append('rect')
