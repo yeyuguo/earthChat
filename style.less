@@ -188,11 +188,16 @@ li{
     }
     & span{
         padding: @padCommon;
-        background: #fff;
+        // background: #fff;
         width: 30px;
         height: 30px;
         color: #000;
         .commonStyle;
+        img{
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+        }
     }
     
     & .content{
@@ -229,6 +234,10 @@ li{
     .myself{
         text-align: right;
         float: right;
+        .content{
+            background: @backGreen;
+            color:#fff;
+        }
         .content:before{
             content: "";
             position: absolute;
@@ -237,7 +246,7 @@ li{
             width: 0;
             height: 0;
             border-top: solid transparent;
-            border-left: 7px solid #fff;
+            border-left: 7px solid @backGreen;
             border-bottom: 4px solid transparent;
         }
     }

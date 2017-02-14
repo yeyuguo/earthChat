@@ -152,13 +152,17 @@ li dl dd {
   margin-bottom: 10px;
 }
 #chatDiv span {
-  background: #fff;
   width: 30px;
   height: 30px;
   background: fff;
   color: #000;
   border-radius: 5px;
   padding: 5px 10px;
+}
+#chatDiv span img {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 #chatDiv .content {
   background: fff;
@@ -193,6 +197,10 @@ li dl dd {
   text-align: right;
   float: right;
 }
+#chatDiv .myself .content {
+  background: #2CA143;
+  color: #fff;
+}
 #chatDiv .myself .content:before {
   content: "";
   position: absolute;
@@ -201,7 +209,7 @@ li dl dd {
   width: 0;
   height: 0;
   border-top: solid transparent;
-  border-left: 7px solid #fff;
+  border-left: 7px solid #2CA143;
   border-bottom: 4px solid transparent;
 }
 #inputBox {
