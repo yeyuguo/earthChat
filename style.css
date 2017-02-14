@@ -124,12 +124,13 @@ li dl dd {
   border-top: 1px solid #fff;
 }
 #chatDiv {
+  z-index: -3;
   position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 672px;
+  width: 96%;
+  height: 100%;
   background-color: rgba(212, 0, 0, 0.2);
   overflow: auto;
+  padding: 5px 10px;
 }
 #chatDiv p {
   background: #fff;
@@ -140,11 +141,66 @@ li dl dd {
   margin-bottom: 8px;
   border-radius: 2px;
 }
+#chatDiv .commonStyle {
+  background: fff;
+  color: #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+#chatDiv section {
+  clear: both;
+  margin-bottom: 10px;
+}
+#chatDiv span {
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  background: fff;
+  color: #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+#chatDiv .content {
+  background: fff;
+  color: #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  max-width: 225px;
+  display: inline-block;
+  position: relative;
+  margin: 0 20px 0 10px;
+  background-color: #fff;
+  box-shadow: inset 0 0 1px #fff;
+  vertical-align: top;
+  word-break: break-all;
+}
 #chatDiv .other {
   text-align: left;
   float: left;
 }
+#chatDiv .other .content:before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 0;
+  height: 0;
+  border-top: solid transparent;
+  border-right: 7px solid #fff;
+  border-bottom: 4px solid transparent;
+}
 #chatDiv .myself {
   text-align: right;
   float: right;
+}
+#chatDiv .myself .content:before {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 4px;
+  width: 0;
+  height: 0;
+  border-top: solid transparent;
+  border-left: 7px solid #fff;
+  border-bottom: 4px solid transparent;
 }

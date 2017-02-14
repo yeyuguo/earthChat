@@ -154,12 +154,16 @@ li{
 }
 
 #chatDiv{
+    z-index: -3;
+    // position: absolute;
+    // width: 100%;
+    // height: 672px;
     position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 672px;
+    width: 96%;
+    height: 100%;
     background-color:rgba(212,0,0,0.2);
     overflow: auto;
+    padding:@padCommon;
     & p{
         background: #fff;
         color:#000000;
@@ -171,12 +175,66 @@ li{
         // position: fixed;
         // z-index: 10;
     }
+    .commonStyle{
+        background:fff;
+        color:#000;
+        border-radius: 5px;
+        padding: @padCommon;
+    }
+    & section{
+        clear:both;
+        margin-bottom:10px;
+    }
+    & span{
+        padding: @padCommon;
+        background: #fff;
+        width: 30px;
+        height: 30px;
+        color: #000;
+        .commonStyle;
+    }
+    
+    & .content{
+        .commonStyle;
+        max-width: 225px;
+        display: inline-block;
+        position: relative;
+        margin: 0 20px 0 10px;
+        background-color: #fff;
+        box-shadow: inset 0 0 1px #fff;
+        vertical-align: top;
+        word-break: break-all;
+        
+    }
     .other{
         text-align: left;
         float: left;
+        .content:before{
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 0;
+            height: 0;
+            border-top: solid transparent;
+            border-right: 7px solid #fff;
+            border-bottom: 4px solid transparent;
+        }
+        
     }
     .myself{
         text-align: right;
         float: right;
+        .content:before{
+            content: "";
+            position: absolute;
+            right: -7px;
+            top: 4px;   
+            width: 0;
+            height: 0;
+            border-top: solid transparent;
+            border-left: 7px solid #fff;
+            border-bottom: 4px solid transparent;
+        }
     }
 }
