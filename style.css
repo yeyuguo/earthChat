@@ -3,12 +3,12 @@
   padding: 0;
 }
 body {
+  padding: 5px 10px;
   font-size: 14px;
   background-color: #444444;
   background-image: -webkit-gradient(linear, left top, right bottom, from(#000), to(#333));
   background-image: -webkit-linear-gradient(left top, #000, #333);
   background-image: -moz-linear-gradient(left top, #000, #333);
-  overflow: hidden;
 }
 li {
   list-style: none;
@@ -168,7 +168,7 @@ li dl dd {
   max-width: 225px;
   display: inline-block;
   position: relative;
-  margin: 0 20px 0 10px;
+  margin: 0 15px 0 15px;
   background-color: #fff;
   box-shadow: inset 0 0 1px #fff;
   vertical-align: top;
@@ -203,4 +203,24 @@ li dl dd {
   border-top: solid transparent;
   border-left: 7px solid #fff;
   border-bottom: 4px solid transparent;
+}
+#inputBox {
+  padding: 5px 10px;
+  background: #F3F3F5;
+  position: absolute;
+  bottom: 20px;
+  width: 95%;
+}
+#inputBox .inputDia {
+  padding: 5px 10px;
+  width: 80%;
+}
+#inputBox .sendBtn {
+  cursor: pointer;
+  background: #2CA143;
+  color: #fff;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  margin-left: 5px;
 }
