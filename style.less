@@ -147,4 +147,33 @@ li{
             
         }
     }
+    &:hover{
+        border-top:1px solid #fff;
+        // box-shadow: 2px 2px 3px;
+    }
+}
+
+#chatDiv{
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 672px;
+    background-color:rgba(212,0,0,0.2);
+    overflow: auto;
+    & p{
+        color:#fff;
+        width: inherit;
+        padding:@padCommon;
+        width: 60%;
+        // position: fixed;
+        // z-index: 10;
+    }
+    .other{
+        text-align: left;
+        float: left;
+    }
+    .myself{
+        text-align: right;
+        float: right;
+    }
 }
