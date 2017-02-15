@@ -5,11 +5,72 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <script src='jquery3.1.1.min.js'></script>
+    <script src='socket.io.js'></script>
 </head>
 
 <body>
-    heeloe
+    <form>
+        <input class='sendText' type="text" name="" value="">
+        <input type="submit" value="提交">
+    </form>
+    <div class="receive">
+        <span>
+            server收到的消息是：
+        </span>
+        <span class="showMsg"></span>
+    </div>
+
+
+    <script>
+        $(function() {
+            var socket = io();
+            console.log(socket);
+            $('form').submit(function() {
+                var sendText = $('.sendText').val();
+                socket.emit('client send', sendText);
+                $('.sendText').val('');
+                return false;
+            })
+
+            socket.on('server send', function(msg) {
+                console.log('server send msg is :', msg);
+                eventClass.renderMsg(msg)
+            })
+
+
+        })
+
+        var eventClass = function() {
+            function isHideRecieve() {
+                if ($('.showMsg').html() == '') {
+                    $('.receive').hide()
+                } else {
+                    $('.receive').show()
+                }
+            }
+
+            function renderMsg(msg) {
+                // if ($('.showMsg').html() != '') {
+                //     return
+                // }
+                $('.showMsg').html(msg);
+                isHideRecieve()
+            }
+
+            return {
+                result: 'yes',
+                isHideRecieve: function() {
+                    isHideRecieve()
+                },
+                renderMsg: function(msg) {
+                    this.isHideRecieve()
+                    renderMsg(msg)
+                }
+            }
+        }()
+    </script>
 </body>
 
 </html>
