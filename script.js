@@ -355,6 +355,7 @@ var EventClass = function() {
         }(bar, target);
     }
 
+
     return {
         result: 'yes',
         closeAvator: function() {

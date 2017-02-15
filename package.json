@@ -1,0 +1,23 @@
+{
+  "name": "earth-chat",
+  "version": "1.0.0",
+  "description": "for myself",
+  "main": "d3.custom.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeyuguo/earthChat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeyuguo/earthChat/issues"
+  },
+  "homepage": "https://github.com/yeyuguo/earthChat#readme",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.7.2"
+  }
+}
