@@ -69,7 +69,7 @@
 
             // 聊天对话
 
-
+            console.log('Chat.username:', Chat.username)
             Chat.init('yeyuguo')
 
 
@@ -127,14 +127,14 @@
                 if (msg == '') {
                     return false;
                 }
-                console.log(this.userid)
+                // console.log(this.userid)
                 var clientObj = {
                     roomid: null,
                     userid: this.userid,
                     username: this.username,
                     msg: msg
                 }
-                this.socket.emit('client send', clientObj)
+                Chat.socket.emit('client send', clientObj)
                 $('.inputDia').val('')
             },
             clientSend: function() {
@@ -145,25 +145,45 @@
                 })
             },
             serverSend: function() {
-                this.socket.on('server send', function(serverObj) {
+                Chat.socket.on('server send', function(serverObj) {
                     console.log('server send obj is :', serverObj)
-                    Chat.renderMsg('myself', serverObj.msg)
+                    if (serverObj.userid == Chat.userid) {
+                        Chat.renderMsg('myself', serverObj.msg)
+                    } else {
+                        Chat.renderMsg('other', serverObj.msg)
+                    }
+                    console.log('onlineUser 是否相等:', Chat.onlineUser != serverObj.onlineUser)
+                    if (Chat.onlineUser != serverObj.onlineUser) {
+                        Chat.onlineUser = serverObj.onlineUser
+                    }
+
+                    // console.log('Chat obj:', Chat)
+
                 })
             },
             renderMsg: function(obj, msg) {
                 $('#chatDiv').append(`<p class=${obj}>${msg}</p>`)
                 this.scrollBottom()
             },
+            exitChat: function() {
+                this.socket.on('disconnect', function(onlineUser) {
+                    this.onlineUser = onlineUser
+                    Chat.onlineUser = onlineUser
+                    console.log('现有剩下的用户：', onlineUser)
+                })
+            },
             init: function(username) {
                 // 不在同一个域内的连接
-                // this.socket = io.connect('ws://127.0.0.1:3000');
+                Chat.socket = io.connect('ws://127.0.0.1:3001');
                 // 在同一个域内的连接
-                this.socket = io()
+                // this.socket = io()
                 this.userid = this.genUid()
 
                 Chat.username = username || 'yeyuguo'
+                    // Chat.username = 'yeyuguo' + this.userid.substr(-4, 4)
                 this.clientSend()
                 this.serverSend()
+                this.exitChat()
 
             }
         }
