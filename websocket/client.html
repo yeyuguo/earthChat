@@ -8,13 +8,15 @@
     <!--<link href="css/style.css" rel="stylesheet">-->
     <script src='jquery3.1.1.min.js'></script>
     <script src='socket.io.js'></script>
+    <link rel="stylesheet/less" href="style.less">
+    <script src='less.min.js'></script>
 </head>
 
 <body>
-    <form>
+    <!--<form>
         <input class='sendText' type="text" name="" value="">
         <input type="submit" value="提交">
-    </form>
+    </form>-->
     <div class="receive">
         <span>
             server收到的消息是：
@@ -23,21 +25,52 @@
     </div>
 
 
+    <div id="chatDiv">
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+        <p class="other">你好</p>
+        <p class="myself">nihao</p>
+
+
+    </div>
+    <div id="inputBox">
+        <form>
+            <input type="text" name="" value="" class='inputDia'>
+            <input type="submit" value="发送" class="sendBtn">
+        </form>
+    </div>
+
     <script>
         $(function() {
-            var socket = io();
-            console.log(socket);
-            $('form').submit(function() {
-                var sendText = $('.sendText').val();
-                socket.emit('client send', sendText);
-                $('.sendText').val('');
-                return false;
-            })
+            // var socket = io();
+            // console.log(socket);
+            // $('form').submit(function() {
+            //     var sendText = $('.sendText').val();
+            //     socket.emit('client send', sendText);
+            //     $('.sendText').val('');
+            //     return false;
+            // })
 
-            socket.on('server send', function(msg) {
-                console.log('server send msg is :', msg);
-                eventClass.renderMsg(msg)
-            })
+            // socket.on('server send', function(msg) {
+            //     console.log('server send msg is :', msg);
+            //     eventClass.renderMsg(msg)
+            // })
+
+
+            // 聊天对话
+
+
+            Chat.init('yeyuguo')
 
 
         })
@@ -70,6 +103,70 @@
                 }
             }
         }()
+
+
+
+        // 聊天的对话室
+
+        var Chat = {
+            onlineUser: {},
+            username: null,
+            userid: null,
+            socket: null,
+            genUid: function() {
+                return new Date().getTime() + "" + Math.floor(Math.random() * 899 + 100);
+            },
+            scrollBottom: function(obj) {
+                var obj = obj || 'chatDiv'
+                var getObj = document.getElementById(obj) || document.getElementsByClassName(obj) || document.getElementsByTagName(obj)
+                getObj.scrollTop = getObj.scrollHeight
+            },
+            // 发送消息
+            submit: function() {
+                var msg = $('.inputDia').val()
+                if (msg == '') {
+                    return false;
+                }
+                console.log(this.userid)
+                var clientObj = {
+                    roomid: null,
+                    userid: this.userid,
+                    username: this.username,
+                    msg: msg
+                }
+                this.socket.emit('client send', clientObj)
+                $('.inputDia').val('')
+            },
+            clientSend: function() {
+                $('#inputBox form').submit(function() {
+                    Chat.submit();
+                    // 如果不加 false 页面会跳转
+                    return false;
+                })
+            },
+            serverSend: function() {
+                this.socket.on('server send', function(serverObj) {
+                    console.log('server send obj is :', serverObj)
+                    Chat.renderMsg('myself', serverObj.msg)
+                })
+            },
+            renderMsg: function(obj, msg) {
+                $('#chatDiv').append(`<p class=${obj}>${msg}</p>`)
+                this.scrollBottom()
+            },
+            init: function(username) {
+                // 不在同一个域内的连接
+                // this.socket = io.connect('ws://127.0.0.1:3000');
+                // 在同一个域内的连接
+                this.socket = io()
+                this.userid = this.genUid()
+
+                Chat.username = username || 'yeyuguo'
+                this.clientSend()
+                this.serverSend()
+
+            }
+        }
     </script>
 </body>
 

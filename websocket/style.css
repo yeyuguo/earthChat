@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.other {
+  text-align: left;
+}
+.myself {
+  text-align: right;
+}
+#chatDiv {
+  width: 500px;
+  height: 500px;
+  padding: 5px 10px;
+  background: #000;
+  color: #fff;
+  overflow: auto;
+}
+#chatDiv p {
+  height: 50px;
+}
