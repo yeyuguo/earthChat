@@ -39,19 +39,19 @@
         <img class='avator' width='150px' height='150px'>
         <div class="desc">
             <ul>
-                <li>
+                <li class='username'>
                     <dt>姓名:</dt>
                     <dd>叶玉国</dd>
                 </li>
-                <li>
+                <li class='age'>
                     <dt>年龄:</dt>
                     <dd>22</dd>
                 </li>
-                <li>
+                <li class='school'>
                     <dt>学校:</dt>
                     <dd>不告诉你</dd>
                 </li>
-                <li>
+                <li class='addr'>
                     <dt>现居地:</dt>
                     <dd>北京</dd>
                 </li>
@@ -101,7 +101,13 @@
         </form>
     </div>
     <script src="js/d3.custom.js"></script>
-    <script src="script.js"></script>
+    <!--<script src="script.js"></script>-->
+    <script src="js/earth.js"></script>
+    <script src='js/chat.js'></script>
+
+    <script>
+        Chat.init('yeyuguo')
+    </script>
 </body>
 
 </html>

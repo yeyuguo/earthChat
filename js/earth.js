@@ -116,22 +116,6 @@
 
         var dialogBox = svg.append("g")
             .attr("id", "dialogBox")
-            .attr('wmode','transparent')
-
-        // dialogBox.on('click',function(){
-        //     console.log(d3.select(this))
-        //     alert(0)
-        //     var src = picBox.attr('href')
-        //     console.log(src)
-
-        //     d3.select('#resizeBig')
-        //         .attr('style', 'display:block')
-
-        //     d3.select('#resizeBig .avator')
-        //         .attr('src', src)
-        //         .attr('alt', '头像展示')
-        // })
-        
 
 
         //Add all of the countries to the globe
@@ -232,8 +216,13 @@
                 .style("fill", "red");
 
 
-            
-                
+            picBox = dialogBox.append("image")
+                .attr("x", proPeking[0] - 30)
+                .attr("y", proPeking[1] - 30)
+                .attr("width", 35)
+                .attr("height", 35)
+                // .attr("xlink:href", "duang/img/user-2.png");
+                .attr("xlink:href", "images/meinv.jpg");
 
 
             PopupBox = dialogBox.append('rect')
@@ -245,34 +234,19 @@
                 .attr('fill', 'white')
                 .attr('width', 100)
                 .attr('height', 30)
-            
-          
-            
+
 
             textBox = dialogBox.append('text')
                 .attr('class', 'Popup')
                 .attr('x', proPeking[0] + 5)
                 .attr('y', proPeking[1] + 20)
                 .html(textCont)
-            
-            picBox = dialogBox.append("image")
-                .attr("x", proPeking[0] - 30)
-                .attr("y", proPeking[1] - 30)
-                .attr('z-index',9999)
-                .attr("width", 35)
-                .attr("height", 35)
-                .attr("xlink:href", "images/meinv.jpg");
-                // .attr("xlink:href", "duang/img/user-2.png");
-          
-            console.log('picBox:',picBox)
 
             picBox.on("click", function() {
                 // console.log(d3.select('#resizeBig img'))
                 // if (d3.select('#resizeBig img')[0][0]) {
                 //     return
                 // }
-                console.log(d3.select(this))
-                alert(0)
                 var src = d3.select(this).attr('href')
                 console.log(src)
 
@@ -312,6 +286,40 @@ var EventClass = function() {
         if ($('#resizeBig').css('display') != 'none') {
             $('#resizeBig').css('display', 'none');
         }
+
+    }
+
+    function openAvator(avatarObj) {
+        if ($('#resizeBig').css('display') == 'none') {
+            $('#resizeBig').css('display', 'block');
+
+            console.log('avatarObj:', avatarObj)
+            var now_username = $('#resizeBig').find('.username dd').text()
+            if (avatarObj && avatarObj.username != now_username) {
+                console.log('点击的头像与上一次不同，替换内容')
+                renderAvatar(avatarObj)
+            }
+        }
+    }
+
+    function renderAvatar(avatarObj) {
+        console.log('renderAvatar obj:', avatarObj)
+        var avatarObj = avatarObj || {
+            avatar: '../images/t2.png',
+            username: '小白',
+            userid: '123213213',
+            school: '天津',
+            age: '24',
+            addr: '昆明',
+        }
+        var paraentObj = $('#resizeBig')
+        paraentObj.find('img').attr('src', avatarObj.avatar)
+        console.log('++++>', paraentObj.children('.username dd').text())
+        paraentObj.find('.username dd').text(avatarObj.username)
+        paraentObj.find('.age dd').text(avatarObj.age)
+        paraentObj.find('.school dd').text(avatarObj.school)
+        paraentObj.find('.addr dd').text(avatarObj.addr)
+
     }
 
     // 拖拽移动
@@ -387,6 +395,9 @@ var EventClass = function() {
         closeAvator: function() {
             closeAvator()
         },
+        openAvator: function(avatarObj) {
+            openAvator(avatarObj)
+        },
         dragMove: function(bar, target) {
             return dragMove(bar, target)
         }
@@ -399,6 +410,4 @@ $(function() {
     var clickSlide = document.getElementById('close')
     var moveSlide = document.getElementById('resizeBig')
     EventClass.dragMove(clickSlide, moveSlide)
-    // 
-    
 })

@@ -124,7 +124,7 @@ li dl dd {
   border-top: 1px solid #fff;
 }
 #chatDiv {
-  z-index: -3;
+  z-index: 3;
   position: absolute;
   width: 96%;
   height: 100%;
@@ -216,6 +216,7 @@ li dl dd {
   padding: 5px 10px;
   background: #F3F3F5;
   position: absolute;
+  z-index: 10;
   bottom: 20px;
   width: 95%;
 }
