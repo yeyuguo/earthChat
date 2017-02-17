@@ -8,6 +8,14 @@
     <script src='js/less.min.js'></script>
     <script src="js/jquery3.1.1.min.js"></script>
     <script src='js/socket.io.js'></script>
+    <!--获取地理位置 script-->
+    <!--参考地址：http://www.jb51.net/article/58654.htm-->
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8">
+        // alert(returnCitySN.cname)
+    </script>
+    <!--<script src='http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js'>
+        // alert(remote_ip_info.city)
+    </script>-->
 </head>
 
 <body>
@@ -53,7 +61,7 @@
                 </li>
                 <li class='addr'>
                     <dt>现居地:</dt>
-                    <dd>北京</dd>
+                    <dd>...</dd>
                 </li>
             </ul>
         </div>
@@ -102,11 +110,19 @@
     </div>
     <script src="js/d3.custom.js"></script>
     <!--<script src="script.js"></script>-->
+    <script src='js/common.js'></script>
     <script src="js/earth.js"></script>
     <script src='js/chat.js'></script>
 
     <script>
         Chat.init('yeyuguo')
+        var ip = '124.127.108.133'
+        var ip_position = 'http://ip.taobao.com/service/getIpInfo.php?ip=' + ip
+        Common.getAjax({
+            url: ip_position,
+        }, function(result) {
+            console.log('result:', result)
+        })
     </script>
 </body>
 

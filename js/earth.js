@@ -314,7 +314,7 @@ var EventClass = function() {
         }
         var paraentObj = $('#resizeBig')
         paraentObj.find('img').attr('src', avatarObj.avatar)
-        console.log('++++>', paraentObj.children('.username dd').text())
+
         paraentObj.find('.username dd').text(avatarObj.username)
         paraentObj.find('.age dd').text(avatarObj.age)
         paraentObj.find('.school dd').text(avatarObj.school)
@@ -325,8 +325,8 @@ var EventClass = function() {
     // 拖拽移动
 
     function dragMove(bar, target) {
-        console.log(bar)
-        console.log(target)
+        // console.log(bar)
+        // console.log(target)
         var params = {
             left: 0,
             top: 0,

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='./jquery3.1.1.min.js'></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src='http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js'></script>
+</head>
+
+<body>
+    <div class="show"></div>
+</body>
+<script>
+    $(function() {
+        alert(returnCitySN.cname)
+        alert(remote_ip_info.city)
+        var url
+        url = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js'
+            // url = 'http://pv.sohu.com/cityjson'
+            // $.ajax({
+            //     url: url,
+            //     type: 'GET',
+            //     dataType: "json",
+            //     success: function(result) {
+            //         console.log(result);
+            //         $('.show').text(`url : ${this.url}<br>
+            //         result : ${result}`)
+            //     },
+            //     error: function(error) {
+            //         console.log('error:', error);
+            //         var error = JSON.stringify(error)
+            //         $('.show').text(`url : ${this.url}<br>
+
+        //         error : ${error}`)
+        //     }
+        // })
+
+
+        $.getJSON(url,
+            function(data) {
+                alert(data);
+            }
+        );
+
+        //     var ip = '124.127.108.133'
+        //     var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
+        //     $.getJSON(url, {
+        //             dataType: 'jsonp'
+        //         },
+        //         function(json) {
+        //             var myprovince2 = json.data.area;
+        //             var mycity2 = json.data.region;
+        //             alert("您所在的城市是：" + myprovince2 + mycity2);
+        //         });
+
+    })
+</script>
+
+
+</html>

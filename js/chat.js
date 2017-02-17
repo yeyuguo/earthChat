@@ -62,6 +62,7 @@ var Chat = {
             console.log('server send obj is :', serverObj)
             chatObj.msg = serverObj.msg
             chatObj.username = serverObj.username
+            chatObj.userid = serverObj.userid
             if (serverObj.userid == Chat.userid) {
                 // 当前对象发送的界面
                 chatObj.avatar = 'images/t1.jpg'
@@ -129,11 +130,11 @@ var Chat = {
             console.log('src:', src)
             var avatarObj = {
                 avatar: src,
-                username: '小白',
-                userid: 'aaa',
+                username: chatObj.username,
+                userid: chatObj.userid,
                 school: '天津',
                 age: '24',
-                addr: '昆明',
+                addr: returnCitySN.cname,
             }
             EventClass.openAvator(avatarObj)
         })
@@ -158,6 +159,9 @@ var Chat = {
         this.clientSend()
         this.serverSend()
         this.exitChat()
+
+    },
+    position: function(ip) {
 
     }
 }

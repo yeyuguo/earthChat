@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>获取新浪短网址</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <!--<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>-->
+</head>
+
+<body>
+    <label for="long">长网址：</label>
+    <input value="http://baike.baidu.com/link?url=XLrVdYRThMvU_DlDT67v2wg9XYgG3xXvsB97WZFDz4psPORqGotkTiH1O5L1SGrD9Du-OSxWt_5E2KNtk01HhK" id="long"><br><br>
+    <label for="app_key">输入您的app_key(没有可到网上搜索)：</label><br>
+    <input value="211160679" id="app_key"><br><br>
+    <span id="short">短网址：</span><br><br>
+    <span id="dlgcy">调用地址：</span><br><br>
+    <button type="button" id="btn">Click me</button><br>
+    <!--<span id="link">网址：</span>-->
+    <br><br><br>
+    <a href="http://www.cnblogs.com/azure/archive/2012/08/29/WeiboAPI.html" target="_blank">参考文章：以短链服务为例，探讨免AppKey、免认证、Ajax跨域调用新浪微博API</a>
+    <br><br>
+    <a href="http://open.weibo.com/tools/console?uri=short_url/shorten&httpmethod=GET&key1=url_long&value1=http%3A%2F%2Fopen.weibo.com%2Fqa" target="_blank">新浪API测试</a>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btn").click(function() {
+            var short = $("#short");
+            var long = $("#long").val(); //获取属性值； 
+            //var url = "https://api.weibo.com/2/short_url/shorten.json"; //官方API地址； 
+            var url2 = "http://api.weibo.com/2/short_url/shorten.json";
+            var app_key = $("#app_key").val(); //app_key无效可能会导致无反应； 
+            //var access_token; 
+            //var cmd = url + "&url_long=" + long + "&access_token=" + access_token; 
+            var cmd2 = url2 + "?source=" + app_key + "&url_long=" + long;
+
+            var message = "";
+            $.ajax({ //底层方法； 
+                url: cmd2,
+                type: "GET",
+                dataType: "jsonp", //使用JSONP方法进行AJAX,json有跨域问题； 
+                cache: false,
+                success: function(data, status) {
+                    //获取传回的信息； 
+                    for (x in data.data.urls[0]) message += x + '=' + data.data.urls[0][x] + '&';
+                    alert("Data:\n" + message + "\n\nStatus: " + status);
+                    short.append(data.data.urls[0].url_short + "<br>");
+                    //$("#dlgcy").hide(); 
+                    $("#dlgcy").text(cmd2);
+                },
+                error: function(obj, info, errObj) {
+                    alert("$.ajax()中发生错误：" + info);
+                }
+            });
+
+        });
+    });
+</script>
+
+</html>
