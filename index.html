@@ -116,13 +116,8 @@
 
     <script>
         Chat.init('yeyuguo')
-        var ip = '124.127.108.133'
-        var ip_position = 'http://ip.taobao.com/service/getIpInfo.php?ip=' + ip
-        Common.getAjax({
-            url: ip_position,
-        }, function(result) {
-            console.log('result:', result)
-        })
+            // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
+            // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
     </script>
 </body>
 
