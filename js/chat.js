@@ -62,7 +62,9 @@ var Chat = {
             console.log('server send obj is :', serverObj)
             chatObj.msg = serverObj.msg
             chatObj.username = serverObj.username
-            chatObj.userid = serverObj.userid
+            // TODO 不理解 为何我用 serverObj.userid  点击头像有时候会是一样的
+            // chatObj.userid = serverObj.userid
+            chatObj.userid = Chat.userid
             if (serverObj.userid == Chat.userid) {
                 // 当前对象发送的界面
                 chatObj.avatar = 'images/t1.jpg'

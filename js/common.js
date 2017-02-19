@@ -44,15 +44,14 @@ var Common = function() {
 
             });
     }
-    var host = '127.0.0.1'
-    var port = 80
-    var url_request = `http://${host}:${port}` || `http://${window.location.host}:${port}`
-        /*
-         * urlParamas is except of IP:PORT/ */
+    var host = '127.0.0.1';
+    var port = 80;
+    // var url_request = `http://${window.location.host}:${port}`
+    var url_request = null;
+    /*
+     * urlParamas is except of IP:PORT/ */
     function get_request(allPath, fn) {
-        console.log(allPath)
         var defer = $.Deferred();
-
         var urlParams = {}
         var path, params, url
         if (typeof(allPath) != 'object') {
@@ -79,13 +78,14 @@ var Common = function() {
             }
             urlParams = allPath
         }
-        console.log(allPath)
-        console.log('url:', url)
+        // console.log(allPath)
+        // console.log('url:', url)
         $.ajax({
             // url: 'http://' + window.location.host + path,
             url: url,
-            dataType: 'json',
-            type: 'get',
+            // dataType: 'json',
+            dataType: allPath.dataType || 'json',
+            type: 'GET',
             data: urlParams,
             success: function(data) {
                 var data
@@ -93,6 +93,8 @@ var Common = function() {
                 if (typeof(data) == 'string') {
                     data = JSON.parse(data)
                 }
+
+
                 if (fn) {
                     // data = JSON.parse(data)
                     // 异步方式
@@ -199,10 +201,11 @@ var Common = function() {
     return {
         test: 'test',
         url: null,
-        getAjax: function(obj) {
-            if (!this.url) {
-                get_request(obj);
-            }
+        getAjax: function(a, b) {
+            get_request(a, b)
+                // if (!this.url) {
+                //     get_request(obj);
+                // }
         },
         postAjax: function(obj) {
             post_request(obj);
