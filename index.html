@@ -10,8 +10,12 @@
     <script src='js/socket.io.js'></script>
     <!--获取地理位置 script-->
     <!--参考地址：http://www.jb51.net/article/58654.htm-->
-    <script src="http://pv.sohu.com/cityjson?ie=utf-8">
+    <!--<script src="http://pv.sohu.com/cityjson?ie=utf-8">
         // alert(returnCitySN.cname)
+    </script>-->
+    <script src='http://pv.sohu.com/cityjson'>
+        // alert(returnCitySN.cname)
+        // alert(returnCitySN.cip)
     </script>
     <!--<script src='http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js'>
         // alert(remote_ip_info.city)
@@ -118,6 +122,26 @@
         Chat.init('yeyuguo')
             // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
             // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
+        var ip = returnCitySN.cip || '61.51.81.123'
+        Common.getAjax({
+            url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' + ip,
+            dataType: 'jsonp'
+        }, function(result) {
+            var lonlat = result.content.point
+            var lon = lonlat.x
+            var lat = lonlat.y
+            console.log(redraw)
+                // redraw([lon, lat])
+                // var paramsObj = {
+                //     point: [lon, lat],
+                //     msg: 'aa'
+                // }
+                // Earth(window, d3, paramsObj).redraw();
+            Earth.redraw({
+                point: [lon, lat],
+                msg: 'aa'
+            });
+        })
     </script>
 </body>
 
