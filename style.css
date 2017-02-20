@@ -130,9 +130,8 @@ li dl dd {
 }
 #chatDiv {
   position: absolute;
-  width: 96%;
-  height: 100%;
-  background-color: rgba(212, 0, 0, 0.2);
+  width: 90%;
+  height: 85%;
   overflow: auto;
   padding: 5px 10px;
 }
