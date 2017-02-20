@@ -77,9 +77,19 @@ var Chat = {
                 chatObj.className = 'other'
                 chatObj.alt = '别人'
                     // Chat.renderMsg('other', serverObj.msg)
+
+                /*
+                地球仪上 显示对话内容
+                地球仪上只显示 other 其他人发送过来的小时
+                */
+                var serverSendObj = {}
+                serverSendObj.msg = chatObj.msg
+                Earth.markMsg(serverSendObj)
             }
             // console.log('chatObj:', chatObj)
             Chat.renderMsg(chatObj);
+            
+
             console.log('Chat.userid:', Chat.userid)
             console.log('serverObj.userid:', serverObj.userid)
             console.log('onlineUser 是否相等:', Chat.onlineUser != serverObj.onlineUser)
@@ -124,7 +134,9 @@ var Chat = {
                 </section>`
 
         }
+        // 对话框内 显示对话内容
         $('#chatDiv').append(chatDOM)
+        
             // 添加点击事件
         $('#chatDiv section > span').on('click', 'img', function() {
             // alert(1)
@@ -151,6 +163,7 @@ var Chat = {
     },
     init: function(username) {
         // 不在同一个域内的连接
+        // Chat.socket = io.connect('ws://127.0.0.1:3001');
         Chat.socket = io.connect('ws://127.0.0.1:3001');
         // 在同一个域内的连接
         // this.socket = io()
