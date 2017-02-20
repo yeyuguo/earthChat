@@ -123,8 +123,12 @@ li dl dd {
 #resizeBig:hover {
   border-top: 1px solid #fff;
 }
+#earth {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 #chatDiv {
-  z-index: -3;
   position: absolute;
   width: 96%;
   height: 100%;
@@ -150,6 +154,8 @@ li dl dd {
 #chatDiv section {
   clear: both;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 10;
 }
 #chatDiv span {
   width: 30px;

@@ -151,9 +151,9 @@ var Chat = {
     },
     init: function(username) {
         // 不在同一个域内的连接
-        Chat.socket = io.connect('ws://127.0.0.1:3001');
+        // Chat.socket = io.connect('ws://127.0.0.1:3001');
         // 在同一个域内的连接
-        // this.socket = io()
+        this.socket = io()
         this.userid = this.genUid()
 
         // Chat.username = username || 'yeyuguo'

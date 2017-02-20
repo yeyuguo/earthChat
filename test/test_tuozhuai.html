@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <script src='../js/jquery3.1.1.min.js'></script>
+    <style>
+        .main {
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 128, 255, 0.2);
+        }
+        
+        .main p {
+            background: #fff;
+            color: #000;
+            position: relative;
+            z-index: 99;
+        }
+        
+        .other {
+            text-align: left;
+        }
+        
+        .myself {
+            text-align: right;
+        }
+        
+        .middle {
+            width: 100px;
+            height: 100px;
+            background: #000;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <p class="other">11111</p>
+        <p class="myself">2222</p>
+        <p class="other">11111</p>
+        <p class="myself">2222</p>
+        <p class="other">11111</p>
+        <p class="myself">2222</p>
+        <p class="other">11111</p>
+        <p class="myself">2222</p>
+    </div>
+    <div class="middle"></div>
+    <script>
+        $(function() {
+            $('.middle').click(function() {
+                alert('middl 显示')
+            })
+        })
+    </script>
+</body>
+
+</html>
