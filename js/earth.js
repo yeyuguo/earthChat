@@ -61,10 +61,14 @@ var Earth = function(w, d3) {
 
         //Setup path for globe
         var projection = d3.geo.azimuthal()
+            .origin([110, 30])
             .mode("orthographic")
             .translate([width / 2, height / 2]);
 
+        // projection = projection([110, 32])
+
         var scale0 = projection.scale();
+
 
         var path = d3.geo.path()
             .projection(projection)
@@ -78,6 +82,8 @@ var Earth = function(w, d3) {
             .on("zoom", move);
 
         var circle = d3.geo.greatCircle();
+        // 设置中心
+        // circle.center(obj.point);
 
         var svg = d3.select("body")
             .append("svg")
@@ -133,6 +139,7 @@ var Earth = function(w, d3) {
                 .attr("class", "feature")
                 .attr("d", function(d) { return path(circle.clip(d)); });
         });
+
 
         //Redraw all items with new projections
         function redraw() {
@@ -286,9 +293,7 @@ var Earth = function(w, d3) {
         markPoint(obj)
 
         return {
-            redraw: function(obj) {
-                redraw(obj)
-            }
+            redraw: redraw
         }
     }
 
