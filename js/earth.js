@@ -23,14 +23,14 @@
  */
 
 var redraw
-var Earth = function(w, d3, obj) {
+var Earth = function(w, d3) {
 
     "use strict";
     var w = w || window;
 
     var width, height;
 
-    function getSize() {
+    function getSize(obj) {
         width = w.innerWidth,
             height = w.innerHeight;
 
@@ -39,13 +39,16 @@ var Earth = function(w, d3, obj) {
                 getSize();
             }, 100);
         } else {
-            init();
+            init(obj);
         }
     }
 
-    var init = function() {
-
-        //Setup path for outerspace
+    var init = function(obj) {
+        var obj = obj || {
+                point: [110, 30],
+                msg: 'test'
+            }
+            //Setup path for outerspace
         var space = d3.geo.azimuthal()
             .mode("equidistant")
             .translate([width / 2, height / 2]);
@@ -132,34 +135,25 @@ var Earth = function(w, d3, obj) {
         });
 
         //Redraw all items with new projections
-        function redraw(obj) {
-
-            // if(obj.action){
-            //     var fn = obj.action
-            //     delete obj.action
-            //     fn(obj)
-            // }
-            // var point = obj.point || [105, 30]
-            markPoint(obj)
+        function redraw() {
             if (obj) {
                 // obj = {
                 //     point: [116, 34],
                 //     msg: 'test'
                 // }
-
-                markPoint(obj)
-                    // 执行 回调函数
+                // 若存在回调函数 执行 回调函数
                 if (obj.action) {
                     var fn = obj.action
                     delete obj.action
                     fn(obj)
                 }
+                markPoint(obj)
             }
 
             // markPoint([116, 34], '我变化咯')
             // markPoint(point, '我变化咯')
 
-            console.log('feature:', features)
+
             features.attr("d", function(d) {
                 return path(circle.clip(d));
             });
@@ -289,28 +283,19 @@ var Earth = function(w, d3, obj) {
                     .attr('alt', '头像展示')
             })
         }
-        // markPoint(obj)
+        markPoint(obj)
+
         return {
-            markPoint: function(obj) {
-                markPoint(obj)
-            },
             redraw: function(obj) {
                 redraw(obj)
             }
         }
-        // return redraw
     }
 
-    getSize();
+    // getSize(obj);
     return {
         redraw: function(obj) {
-            // markPoint(obj)
-            var inita = init()
-            inita.redraw(obj)
-                // init().redraw(obj)
-                // var initFuct = init(obj)
-                // initFuct.redraw(obj)
-
+            getSize(obj);
         }
     }
     // }(window, d3)

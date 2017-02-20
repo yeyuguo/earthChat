@@ -132,15 +132,13 @@
             var lat = lonlat.y
             console.log(redraw)
                 // redraw([lon, lat])
-                // var paramsObj = {
-                //     point: [lon, lat],
-                //     msg: 'aa'
-                // }
-                // Earth(window, d3, paramsObj).redraw();
-            Earth.redraw({
-                point: [lon, lat],
-                msg: 'aa'
-            });
+            var paramsObj = {
+                    point: [lon, lat],
+                    msg: 'aa'
+                }
+                // paramsObj.point = [110, 30]
+            Earth.redraw(paramsObj);
+
         })
     </script>
 </body>
