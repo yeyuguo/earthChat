@@ -134,12 +134,18 @@
                 // redraw([lon, lat])
             var paramsObj = {
                     point: [lon, lat],
-                    msg: 'aa'
+                    msg: 'aa',
+                    avatar: 'images/t2.png',
                 }
                 // paramsObj.point = [110, 30]
             Earth.redraw(paramsObj);
-
         })
+        var testObj = {
+            msg: 'lalalalala',
+            point: [130, 24],
+            avatar: 'images/t2.png'
+        }
+        Earth.markMsg(testObj)
     </script>
 </body>
 
