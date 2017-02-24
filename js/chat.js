@@ -62,8 +62,8 @@ var Chat = {
             console.log('server send obj is :', serverObj)
             chatObj.msg = serverObj.msg
             chatObj.username = serverObj.username
-            // TODO 不理解 为何我用 serverObj.userid  点击头像有时候会是一样的
-            // chatObj.userid = serverObj.userid
+                // TODO 不理解 为何我用 serverObj.userid  点击头像有时候会是一样的
+                // chatObj.userid = serverObj.userid
             chatObj.userid = Chat.userid
             if (serverObj.userid == Chat.userid) {
                 // 当前对象发送的界面
@@ -88,7 +88,7 @@ var Chat = {
             }
             // console.log('chatObj:', chatObj)
             Chat.renderMsg(chatObj);
-            
+
 
             console.log('Chat.userid:', Chat.userid)
             console.log('serverObj.userid:', serverObj.userid)
@@ -136,8 +136,8 @@ var Chat = {
         }
         // 对话框内 显示对话内容
         $('#chatDiv').append(chatDOM)
-        
-            // 添加点击事件
+
+        // 添加点击事件
         $('#chatDiv section > span').on('click', 'img', function() {
             // alert(1)
             var src = $(this).attr('src')
@@ -150,7 +150,7 @@ var Chat = {
                 age: '24',
                 addr: returnCitySN.cname,
             }
-            EventClass.openAvator(avatarObj)
+            Chat.EventHandle.openAvator(avatarObj)
         })
         this.scrollBottom()
     },
@@ -178,5 +178,63 @@ var Chat = {
     },
     position: function(ip) {
 
-    }
+    },
+    EventHandle: function() {
+        // 关闭头像详细页
+        function closeAvator(obj) {
+            var obj = obj || $('#resizeBig')
+            if (obj.css('display') != 'none') {
+                obj.css('display', 'none');
+            }
+        }
+        // 打开头像详情页
+        function openAvator(avatarObj) {
+            if ($('#resizeBig').css('display') == 'none') {
+                $('#resizeBig').css('display', 'block');
+
+                console.log('avatarObj:', avatarObj)
+                var now_username = $('#resizeBig').find('.username dd').text()
+                if (avatarObj && avatarObj.username != now_username) {
+                    console.log('点击的头像与上一次不同，替换内容')
+                    renderAvatar(avatarObj)
+                }
+            }
+        }
+        // 处理 头像-详情页 的信息
+        function renderAvatar(avatarObj) {
+            console.log('renderAvatar obj:', avatarObj)
+            var avatarObj = avatarObj || {
+                avatar: '../images/t2.png',
+                username: '小白',
+                userid: '123213213',
+                school: '天津',
+                age: '24',
+                addr: '昆明',
+            }
+            var paraentObj = $('#resizeBig')
+            paraentObj.find('img').attr('src', avatarObj.avatar)
+
+            paraentObj.find('.username dd').text(avatarObj.username)
+            paraentObj.find('.age dd').text(avatarObj.age)
+            paraentObj.find('.school dd').text(avatarObj.school)
+            paraentObj.find('.addr dd').text(avatarObj.addr)
+        }
+        return {
+            onceHandle: function() {
+                // 拖拽功能
+                var clickSlide = document.getElementById('close')
+                var moveSlide = document.getElementById('resizeBig')
+                Common.dragMove(clickSlide, moveSlide)
+                $('.close').on('click', function() {
+                    // alert(00)
+                    closeAvator($('#resizeBig'));
+                })
+            }(),
+            closeAvator: closeAvator,
+            openAvator: openAvator,
+            renderAvatar: renderAvatar,
+        }
+
+    }(),
+
 }

@@ -175,7 +175,7 @@ var Earth = function(w, d3) {
                 return spacePath(d);
             });
 
-            EventClass.closeAvator()
+            closeAvator()
 
         }
 
@@ -301,6 +301,7 @@ var Earth = function(w, d3) {
 
         return {
             redraw: redraw,
+            // TODO ：返回 svg 和 projection 给第三方回调；
             svg: svg,
             projection: projection,
         }
@@ -334,151 +335,10 @@ var Earth = function(w, d3) {
 
 
 
-
-//  先执行
-var drag
-var EventClass = function() {
-    // drag = d3.behavior.drag()
-
-    // 一次性自执行函数
-    $(function() {
-        $('#resizeBig .close').on('click', function() {
-            closeAvator()
-        })
-    }())
-
-    // 自定义函数
-    // 关闭头像详细页
-    function closeAvator() {
-        if ($('#resizeBig').css('display') != 'none') {
-            $('#resizeBig').css('display', 'none');
-        }
-
+// 关闭头像详细页
+function closeAvator() {
+    if ($('#resizeBig').css('display') != 'none') {
+        $('#resizeBig').css('display', 'none');
     }
+}
 
-    function openAvator(avatarObj) {
-        if ($('#resizeBig').css('display') == 'none') {
-            $('#resizeBig').css('display', 'block');
-
-            console.log('avatarObj:', avatarObj)
-            var now_username = $('#resizeBig').find('.username dd').text()
-            if (avatarObj && avatarObj.username != now_username) {
-                console.log('点击的头像与上一次不同，替换内容')
-                renderAvatar(avatarObj)
-            }
-        }
-    }
-
-    function renderAvatar(avatarObj) {
-        console.log('renderAvatar obj:', avatarObj)
-        var avatarObj = avatarObj || {
-            avatar: '../images/t2.png',
-            username: '小白',
-            userid: '123213213',
-            school: '天津',
-            age: '24',
-            addr: '昆明',
-        }
-        var paraentObj = $('#resizeBig')
-        paraentObj.find('img').attr('src', avatarObj.avatar)
-
-        paraentObj.find('.username dd').text(avatarObj.username)
-        paraentObj.find('.age dd').text(avatarObj.age)
-        paraentObj.find('.school dd').text(avatarObj.school)
-        paraentObj.find('.addr dd').text(avatarObj.addr)
-
-    }
-
-    // 拖拽移动
-
-    function dragMove(bar, target) {
-        // console.log(bar)
-        // console.log(target)
-        var params = {
-            left: 0,
-            top: 0,
-            currentX: 0,
-            currentY: 0,
-            flag: false
-        };
-        //获取相关CSS属性
-        var getCss = function(o, key) {
-            return o.currentStyle ? o.currentStyle[key] : document.defaultView.getComputedStyle(o, false)[key];
-        };
-
-        //拖拽的实现
-        var startDrag = function(bar, target, callback) {
-            if (getCss(target, "left") !== "auto") {
-                params.left = getCss(target, "left");
-            }
-            if (getCss(target, "top") !== "auto") {
-                params.top = getCss(target, "top");
-            }
-            //o是移动对象
-            bar.onmousedown = function(event) {
-                params.flag = true;
-                if (!event) {
-                    event = window.event;
-                    //防止IE文字选中
-                    bar.onselectstart = function() {
-                        return false;
-                    }
-                }
-                var e = event;
-                params.currentX = e.clientX;
-                params.currentY = e.clientY;
-            };
-            document.onmouseup = function() {
-                params.flag = false;
-                if (getCss(target, "left") !== "auto") {
-                    params.left = getCss(target, "left");
-                }
-                if (getCss(target, "top") !== "auto") {
-                    params.top = getCss(target, "top");
-                }
-            };
-            document.onmousemove = function(event) {
-                var e = event ? event : window.event;
-                if (params.flag) {
-                    var nowX = e.clientX,
-                        nowY = e.clientY;
-                    var disX = nowX - params.currentX,
-                        disY = nowY - params.currentY;
-                    target.style.left = parseInt(params.left) + disX + "px";
-                    target.style.top = parseInt(params.top) + disY + "px";
-                }
-
-                if (typeof callback == "function") {
-                    // callback(parseInt(params.left) + disX, parseInt(params.top) + disY);
-                    callback()
-                }
-            }
-        }(bar, target);
-    }
-
-
-    return {
-        result: 'yes',
-        closeAvator: function() {
-            closeAvator()
-        },
-        openAvator: function(avatarObj) {
-            openAvator(avatarObj)
-        },
-        dragMove: function(bar, target) {
-            return dragMove(bar, target)
-        },
-        renderEarth: function(point) {
-
-            return
-        }
-    }
-}()
-
-
-
-$(function() {
-    var clickSlide = document.getElementById('close')
-    var moveSlide = document.getElementById('resizeBig')
-    EventClass.dragMove(clickSlide, moveSlide)
-})
