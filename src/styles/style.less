@@ -1,0 +1,330 @@
+*{
+    margin:0;
+    padding:0;
+}
+@padCommon:5px 10px;
+@borderRadiusCommon: 3% 3%;
+@backGray:#F3F3F5;
+@backGreen:#2CA143;
+// 95°黑
+@black:rgba(22,20,24,0.95);
+
+
+body {
+    padding:@padCommon;
+    font-size: 14px;
+    background-color: #444444;
+    color:#fff;
+    background-image: -webkit-gradient(linear, left top, right bottom, from(#000), to(#333));
+    background-image: -webkit-linear-gradient(left top, #000, #333);
+    background-image: -moz-linear-gradient(left top, #000, #333);
+    // overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+.full(@wid:100%;@height:100%){
+    width: @wid;
+    height: @height;
+}
+
+
+
+// 登录界面
+#loginBox{
+    .full;
+    position: absolute;
+    left: 0;
+    top:0;
+    z-index: 10;
+    background: rgba(0,0,0,.5);
+    color:#fff;
+    .content{
+        width: 300px;
+        height: 30px;
+        margin: 30% auto;
+        vertical-align: middle;
+        text-align: center;
+        li{
+            clear:both;
+            height: 30px;
+            line-height: 30px;
+            span,input{
+                float: left;
+            }
+            span{
+                display: block;
+                width:60px;
+            }
+            input{
+                width:150px;
+                height: 20px;
+                margin:5px 0;
+                text-align: center;
+                border:none;
+                border-radius:2px;
+            }
+            input[type='submit']{
+                width:100px;
+                margin: 10px 0 0 80px;
+            }
+        }
+    }
+}
+
+#defs {
+    height: 0;
+    width: 0;
+}
+
+.frame {
+    fill: none;
+    pointer-events: all;
+}
+
+.feature {
+    fill: #6CCC00;
+    stroke: #fff;
+    stroke-width: .5px;
+}
+
+.globe {
+    stroke: rgba(255, 255, 255, .5);
+    stroke-width: .25px;
+}
+
+.star {
+    fill: #fff;
+    stroke: rgba(255, 255, 255, .5);
+    stroke-width: .25px;
+}
+
+
+@pad:5px;
+/*self*/
+.Popup{
+    padding:@pad;
+    color:#fff;
+    border-radius: 10px;
+}
+#dialogBox{
+    font-size: 14px;
+    &.Popup{
+        padding:10px;
+        background: #fff;
+    }
+    & rect{
+        padding:5px 10px;
+    }
+    & image{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+li{
+    dl{
+        dt,dd{
+            float: left;
+        }
+    }
+}
+
+// 头像信息
+#resizeBig{
+    display: none;
+    // display: block;
+    border-radius: @borderRadiusCommon;
+    box-shadow: 2px 2px 5px #867f7f;
+    color:#fff;
+    @wid:300px;
+    @hei:300px;
+    position: absolute;
+    // left:50%;
+    // top:50%;
+    left:0;
+    top:0;
+    z-index:99;
+    width: @wid;
+    height: @hei;
+    background:@backGreen;
+    text-align: center;
+    padding:@padCommon;
+    #close{
+        cursor: move;
+        height: 25px;
+    }
+    p.close{
+        float: right;
+        font-size: 20px;
+        cursor: pointer;
+        text-align: right;
+        margin-right: 10px;
+        height: 20px;
+        width: 30px;
+    }
+    & image{
+        z-index: inherit;
+        margin:10px auto;
+    }
+    & .desc{
+        width: 250px;
+        height: 100px;
+        margin: 0 auto;
+        li{
+            float: left;
+            // width: 40%;
+            margin:0 auto;
+            padding:@padCommon;
+            dt{
+                width: 100px;
+            }
+            dd{
+                width: 120px;
+                overflow: hidden;
+            }
+            dt,dd{
+                float: left;    
+            }
+            
+        }
+    }
+    &:hover{
+        // border-top:1px solid #fff;
+        // box-shadow: 2px 2px 3px;
+    }
+}
+#earth{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+// 对话信息
+#chatDiv{
+    position: absolute;
+    // width: 100%;
+    // height: 672px;
+    width: 90%;
+    height: 85%;
+    // background-color:rgba(212,0,0,0.2);
+    overflow: auto;
+    padding:@padCommon;
+    & p{
+        background: #fff;
+        color:#000000;
+        padding:@padCommon;
+        width: 60%;
+        max-width: 60%;
+        margin-bottom: 8px;
+        border-radius: 2px;
+        // position: fixed;
+        // z-index: 10;
+    }
+    .commonStyle{
+        background:fff;
+        color:#000;
+        border-radius: 5px;
+        padding: @padCommon;
+    }
+    & section{
+        clear:both;
+        margin-bottom:10px;
+        position: relative;
+        z-index:2;
+    }
+    & span{
+        padding: @padCommon;
+        // background: #fff;
+        width: 30px;
+        height: 30px;
+        color: #000;
+        .commonStyle;
+        img{
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+        }
+    }
+    
+    & .content{
+        .commonStyle;
+        max-width: 225px;
+        display: inline-block;
+        position: relative;
+        margin: 0 15px 0 15px;
+        background-color: #fff;
+        box-shadow: inset 0 0 1px #fff;
+        vertical-align: top;
+        word-break: break-all;
+        
+    }
+    .other{
+        text-align: left;
+        float: left;
+        .content {
+
+        }
+        .content:before{
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 0;
+            height: 0;
+            border-top: solid transparent;
+            border-right: 7px solid #fff;
+            border-bottom: 4px solid transparent;
+        }
+        
+    }
+    .myself{
+        text-align: right;
+        float: right;
+        .content{
+            background: @backGreen;
+            color:#fff;
+        }
+        .content:before{
+            content: "";
+            position: absolute;
+            right: -7px;
+            top: 4px;   
+            width: 0;
+            height: 0;
+            border-top: solid transparent;
+            border-left: 7px solid @backGreen;
+            border-bottom: 4px solid transparent;
+        }
+    }
+}
+
+
+#inputBox{
+    padding:@padCommon;
+    background: @backGray;
+    position: absolute;
+    z-index: 3;
+    bottom: 20px;
+    width: 95%;
+    .inputDia{
+        padding:@padCommon;
+        width: 80%;
+    }
+    .sendBtn{
+        cursor: pointer;
+        background: @backGreen;
+        color: #fff;
+        padding:@padCommon;
+        border:1px solid #fff;
+        border-radius: 3px;
+        margin-left: 5px;
+    }
+}
