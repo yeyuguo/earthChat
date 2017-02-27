@@ -263,25 +263,7 @@ var Earth = function(w, d3) {
                 .attr("height", 35)
                 // .attr("xlink:href", "duang/img/user-2.png");
                 .attr("xlink:href", picSrc);
-
-
-            PopupBox = dialogBox.append('rect')
-                .attr('class', 'Popup')
-                .attr('x', proPeking[0] + 1)
-                .attr('y', proPeking[1] + 1)
-                .attr('rx', 5)
-                .attr('ry', 5)
-                .attr('fill', 'white')
-                .attr('width', 100)
-                .attr('height', 30)
-
-
-            textBox = dialogBox.append('text')
-                .attr('class', 'Popup')
-                .attr('x', proPeking[0] + 5)
-                .attr('y', proPeking[1] + 20)
-                .html(textCont)
-
+            
             picBox.on("click", function() {
                 // console.log(d3.select('#resizeBig img'))
                 // if (d3.select('#resizeBig img')[0][0]) {
@@ -297,6 +279,34 @@ var Earth = function(w, d3) {
                     .attr('src', src)
                     .attr('alt', '头像展示')
             })
+            var msgW =100,msgH=30
+            if(obj.msg == ''){
+                msgW = 0 
+                msgH = 0
+            }
+            PopupBox = dialogBox.append('rect')
+                .attr('class', 'Popup')
+                .attr('x', proPeking[0] + 1)
+                .attr('y', proPeking[1] + 1)
+                .attr('rx', 5)
+                .attr('ry', 5)
+                .attr('fill', 'white')
+                .attr('width', msgW)
+                .attr('height', msgH)
+                // .html(textCont)
+
+            textBox = dialogBox.append('text')
+                .attr('class', 'Popup')
+                .attr('x', proPeking[0] + 5)
+                .attr('y', proPeking[1] + 20)
+                .html(textCont)
+
+            
+
+
+            
+
+            
         }
 
         return {

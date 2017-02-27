@@ -25,6 +25,7 @@ var Chat = {
     username: null,
     userid: null,
     socket: null,
+    loginUserObj: null,
     genUid: function() {
         return new Date().getTime() + "" + Math.floor(Math.random() * 899 + 100);
     },
@@ -161,7 +162,7 @@ var Chat = {
             console.log('现有剩下的用户：', onlineUser)
         })
     },
-    init: function(username) {
+    init: function(loginUserObj) {
         // 不在同一个域内的连接
         Chat.socket = io.connect('ws://127.0.0.1:3001');
         // Chat.socket = io.connect('ws://10.9.32.16:3001');
@@ -169,8 +170,10 @@ var Chat = {
         // this.socket = io()
         this.userid = this.genUid()
 
-        // Chat.username = username || 'yeyuguo'
-        Chat.username = 'yeyuguo' + this.userid.substr(-4, 4)
+        Chat.username = loginUserObj.username
+        Chat.loginUserObj = loginUserObj.username
+            // Chat.username = username || 'yeyuguo'
+            // Chat.username = 'yeyuguo' + this.userid.substr(-4, 4)
         this.clientSend()
         this.serverSend()
         this.exitChat()
@@ -179,6 +182,7 @@ var Chat = {
     position: function(ip) {
 
     },
+
     EventHandle: function() {
         // 关闭头像详细页
         function closeAvator(obj) {
@@ -228,7 +232,12 @@ var Chat = {
                 $('.close').on('click', function() {
                     // alert(00)
                     closeAvator($('#resizeBig'));
-                })
+                });
+
+                // 登录
+                // Chat.UserLogin();
+
+
             }(),
             closeAvator: closeAvator,
             openAvator: openAvator,

@@ -6,6 +6,7 @@
     <title>earth chat</title>
     <link rel="stylesheet/less" type="text/css" href="style.less">
     <script src='js/less.min.js'></script>
+    <script src='js/underscore1.8.3.js'></script>
     <script src="js/jquery3.1.1.min.js"></script>
     <script src='js/socket.io.js'></script>
     <!--获取地理位置 script-->
@@ -23,8 +24,34 @@
 </head>
 
 <body>
-    <div id="loginDiv">
-        
+    <div id="loginBox">
+        <div class="content">
+            <form>
+                <ul>
+                    <li>
+                        <span>用户名：</span>
+                        <input class='username' type="text" placeholder="请输入用户名">
+                    </li>
+                    <li>
+                        <span>年龄：</span>
+                        <input type="text" class="userAge" placeholder="请输入年龄">
+                    </li>
+                    <li>
+                        <span>地址：</span>
+                        <input type="text" class="userAddr" placeholder="请输入地址">
+                    </li>
+                    <li>
+                        <span>学校：</span>
+                        <input type="text" class="userSchool" placeholder="请输入学校">
+                    </li>
+                    <li>
+                        <input type="submit" value='登录'>
+                    </li>
+
+                </ul>
+            </form>
+
+        </div>
     </div>
     <svg id="defs">
         <defs>
@@ -123,9 +150,25 @@
 
     <script>
         $(function() {
-            Chat.init('yeyuguo')
-                // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
-                // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
+            // Chat.init('yeyuguo')
+
+            var defer = $.Deferred()
+                // defer.resolve()
+            $('#loginBox form').submit(function(resp) {
+                var defer = $.Deferred();
+
+                var loginUserObj = createLoginObj()
+                console.log('loginUserObj:', loginUserObj)
+                Chat.init(loginUserObj);
+                // Chat.init(username);
+                $('#loginBox input[type="text"]').val('')
+                $('#loginBox').hide();
+                return false;
+            })
+
+
+            // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
+            // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
             var ip = returnCitySN.cip || '61.51.81.123'
             Common.getAjax({
                     url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' + ip,
@@ -138,7 +181,7 @@
                         // redraw([lon, lat])
                     var paramsObj = {
                             point: [lon, lat],
-                            msg: 'aa',
+                            msg: 'aaa',
                             avatar: 'images/t2.png',
                         }
                         // paramsObj.point = [110, 30]
@@ -152,7 +195,27 @@
             }
             Earth.markMsg(testObj)
                 // 关闭头像
-          
+
+            function createLoginObj(obj) {
+                if (obj) return obj;
+                var username = $('#loginBox input[type="text"]').val()
+                if (!username) {
+                    var randomNum = parseInt(Math.random() * 10000)
+                    username = `懒鬼${randomNum}`
+                }
+                var userAge = $('.userAge').val() || '20'
+                var userAddr = $('.userAddr').val() || '云南省昆明市'
+                var userSchool = $('.userSchool').val() || '昆明市第一中学'
+
+                var loginUserObj = {
+                    username: username,
+                    userAge: userAge,
+                    userAddr: userAddr,
+                    userSchool: userSchool
+                }
+                return loginUserObj
+            }
+
         })
     </script>
 </body>
