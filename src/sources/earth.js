@@ -45,7 +45,7 @@ var Earth = function(w, d3) {
         }
     }
 
-    var init = function(obj) {
+    function init(obj) {
         var obj = obj || {
                 point: [110, 30],
                 msg: 'test'
@@ -63,7 +63,7 @@ var Earth = function(w, d3) {
 
         //Setup path for globe
         var projection = d3.geo.azimuthal()
-            .origin([110, 35])
+            // .origin([110, 35])
             .mode("orthographic")
             .translate([width / 2, height / 2]);
 
@@ -87,13 +87,11 @@ var Earth = function(w, d3) {
         // 设置中心
         // circle.center(obj.point);
 
-        var svg = d3.select("body")
-            .append('div')
-            .attr('id','earth')
+        var svg = d3.select("#earth")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
-            .attr('style','postion:absolute;left:0;top:0;')
+            .attr('style', 'postion:absolute;left:0;top:0;')
             .append("g")
             .call(zoom)
             .on("dblclick.zoom", null);
@@ -263,7 +261,7 @@ var Earth = function(w, d3) {
                 .attr("height", 35)
                 // .attr("xlink:href", "duang/img/user-2.png");
                 .attr("xlink:href", picSrc);
-            
+
             picBox.on("click", function() {
                 // console.log(d3.select('#resizeBig img'))
                 // if (d3.select('#resizeBig img')[0][0]) {
@@ -279,9 +277,10 @@ var Earth = function(w, d3) {
                     .attr('src', src)
                     .attr('alt', '头像展示')
             })
-            var msgW =100,msgH=30
-            if(obj.msg == ''){
-                msgW = 0 
+            var msgW = 100,
+                msgH = 30
+            if (obj.msg == '') {
+                msgW = 0
                 msgH = 0
             }
             PopupBox = dialogBox.append('rect')
@@ -301,12 +300,12 @@ var Earth = function(w, d3) {
                 .attr('y', proPeking[1] + 20)
                 .html(textCont)
 
-            
 
 
-            
 
-            
+
+
+
         }
 
         return {
@@ -351,4 +350,3 @@ function closeAvator() {
         $('#resizeBig').css('display', 'none');
     }
 }
-

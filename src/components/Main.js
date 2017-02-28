@@ -1,8 +1,32 @@
+/** 
+ * 
+ *----------Dragon be here!----------/ 
+ * 　　　┏┓　　　┏┓ 
+ * 　　┏┛┻━━━┛┻┓ 
+ * 　　┃　　　　　　　┃ 
+ * 　　┃　　　━　　　┃ 
+ * 　　┃　┳┛　┗┳　┃ 
+ * 　　┃　　　　　　　┃ 
+ * 　　┃　　　┻　　　┃ 
+ * 　　┃　　　　　　　┃ 
+ * 　　┗━┓　　　┏━┛ 
+ * 　　　　┃　　　┃神兽保佑 
+ * 　　　　┃　　　┃代码无BUG！ 
+ * 　　　　┃　　　┗━━━┓ 
+ * 　　　　┃　　　　　　　┣┓ 
+ * 　　　　┃　　　　　　　┏┛ 
+ * 　　　　┗┓┓┏━┳┓┏┛ 
+ * 　　　　　┃┫┫　┃┫┫ 
+ * 　　　　　┗┻┛　┗┻┛ 
+ * ━━━━━━神兽出没━━━━━━
+ */
 require('normalize.css/normalize.css');
 require('../styles/style.less')
-import Earth from './earth';
+import Earths from './earths';
+import Chats from './chats';
 
 import React from 'react';
+
 
 // require('styles/App.css');
 // let yeomanImage = require('../images/yeoman.png');
@@ -12,12 +36,11 @@ class AppComponent extends React.Component {
     return (
       <div id="main">
         Main
-        
         <div id="earth">
-          < Earth  />
+          {/*< Earths  />*/}
         </div>
         <div id="chat">
-
+          < Chats />
         </div>
       </div>
       

@@ -228,7 +228,7 @@ var Chat = {
                 // 拖拽功能
                 var clickSlide = document.getElementById('close')
                 var moveSlide = document.getElementById('resizeBig')
-                Common.dragMove(clickSlide, moveSlide)
+                // Common.dragMove(clickSlide, moveSlide)
                 $('.close').on('click', function() {
                     // alert(00)
                     closeAvator($('#resizeBig'));
