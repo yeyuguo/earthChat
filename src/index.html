@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src='./sources/jquery3.1.1.min.js'></script>
     <script src='./sources/d3.custom.js'></script>
+    <script src='./sources/socket.io.js'></script>
     <!--获取地理位置 script-->
     <!--参考地址：http://www.jb51.net/article/58654.htm-->
     <!--<script src="http://pv.sohu.com/cityjson?ie=utf-8">
@@ -41,15 +42,15 @@
             var defer = $.Deferred()
                 // defer.resolve()
 
-            $('#loginBox form').submit(function(resp) {
-                var loginUserObj = createLoginObj()
-                console.log('loginUserObj:', loginUserObj)
-                    // Chat.init(loginUserObj);
-                    // Chat.init(username);
-                $('#loginBox input[type="text"]').val('')
-                $('#loginBox').hide();
-                return false;
-            })
+            // $('#loginBox form').submit(function(resp) {
+            //     var loginUserObj = createLoginObj()
+            //     console.log('loginUserObj:', loginUserObj)
+            //         // Chat.init(loginUserObj);
+            //         // Chat.init(username);
+            //     $('#loginBox input[type="text"]').val('')
+            //     $('#loginBox').hide();
+            //     return false;
+            // })
 
 
             // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
