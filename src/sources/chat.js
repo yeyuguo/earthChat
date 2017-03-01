@@ -45,8 +45,10 @@ var Chat = {
             roomid: null,
             userid: this.userid,
             username: this.username,
+            avatarInfo:Chat.loginUserObj,
             msg: msg
         }
+        console.log({clientObj})
         Chat.socket.emit('client send', clientObj)
         $('.inputDia').val('')
     },
@@ -66,6 +68,7 @@ var Chat = {
                 // TODO 不理解 为何我用 serverObj.userid  点击头像有时候会是一样的
                 // chatObj.userid = serverObj.userid
             chatObj.userid = Chat.userid
+            chatObj.avatarInfo = serverObj.avatarInfo
             if (serverObj.userid == Chat.userid) {
                 // 当前对象发送的界面
                 chatObj.avatar = 'images/t1.jpg'
@@ -147,9 +150,10 @@ var Chat = {
                 avatar: src,
                 username: chatObj.username,
                 userid: chatObj.userid,
-                school: '天津',
-                age: '24',
-                addr: returnCitySN.cname,
+                school: chatObj.avatarInfo.userSchool,
+                age: chatObj.avatarInfo.userAge,
+                addr: chatObj.avatarInfo.userAddr,
+                // addr: returnCitySN.cname,
             }
             Chat.EventHandle.openAvator(avatarObj)
         })
@@ -171,7 +175,8 @@ var Chat = {
         this.userid = this.genUid()
 
         Chat.username = loginUserObj.username
-        Chat.loginUserObj = loginUserObj.username
+        Chat.loginUserObj = loginUserObj
+        console.log('Chat.loginUserObj:',Chat.loginUserObj)
             // Chat.username = username || 'yeyuguo'
             // Chat.username = 'yeyuguo' + this.userid.substr(-4, 4)
         this.clientSend()
@@ -229,10 +234,10 @@ var Chat = {
                 var clickSlide = document.getElementById('close')
                 var moveSlide = document.getElementById('resizeBig')
                 // Common.dragMove(clickSlide, moveSlide)
-                $('.close').on('click', function() {
-                    // alert(00)
-                    closeAvator($('#resizeBig'));
-                });
+                // $('.close').on('click', function() {
+                //     // alert(00)
+                //     closeAvator($('#resizeBig'));
+                // });
 
                 // 登录
                 // Chat.UserLogin();

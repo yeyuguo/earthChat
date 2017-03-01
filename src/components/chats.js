@@ -16,12 +16,12 @@ const LoginWindow = React.createClass({
     handleSubmit(e){
         e.preventDefault();
         var loginUserObj={}
-        loginUserObj.username = ReactDOM.findDOMNode(this.refs.username).value
+        loginUserObj.username = ReactDOM.findDOMNode(this.refs.username).value 
         loginUserObj.userAge = ReactDOM.findDOMNode(this.refs.userAge).value || '20'
-        loginUserObj.userAddr = ReactDOM.findDOMNode(this.refs.userAddr).value || '云南省昆明市'
+        loginUserObj.userAddr = ReactDOM.findDOMNode(this.refs.userAddr).value || returnCitySN.cname
         loginUserObj.userSchool = ReactDOM.findDOMNode(this.refs.userSchool).value || '云南省昆明市'
 
-        if (!loginUserObj.username) {
+        if (!loginUserObj.username || loginUserObj.username =='') {
             var randomNum = parseInt(Math.random() * 10000)
             loginUserObj.username = `懒鬼${randomNum}`
         }
@@ -36,8 +36,9 @@ const LoginWindow = React.createClass({
         this.props.setLoginInfo(loginUserObj)
 
         // 初始化 Chat.init() 函数
+        console.log(loginUserObj)
         this.props.chatInit(loginUserObj)
-        
+        console.log('loginUserObj:',this.state.loginUserObj)
         $('#loginBox').hide();
         $('#loginBox input[type="text"]').val('');
         return false;
@@ -83,25 +84,34 @@ const LoginWindow = React.createClass({
                         <ul>
                             <li className='username'>
                                 <dt>姓名:</dt>
-                                <dd>叶玉国</dd>
+                                <dd> </dd>
                             </li>
                             <li className='age'>
                                 <dt>年龄:</dt>
-                                <dd>22</dd>
+                                <dd> </dd>
                             </li>
                             <li className='school'>
                                 <dt>学校:</dt>
-                                <dd>不告诉你</dd>
+                                <dd></dd>
                             </li>
                             <li className='addr'>
                                 <dt>现居地:</dt>
-                                <dd>...</dd>
+                                <dd> </dd>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         )
+    },
+    componentDidMount(){
+        // 关闭头像详细页
+        $('#close').on('click', 'p.close',function() {
+            var obj = $('#resizeBig')
+            if (obj.css('display') != 'none') {
+                obj.css('display', 'none');
+            }
+        });
     }
 })
 
@@ -131,6 +141,49 @@ const ChatWindow = React.createClass({
     }
 })
 
+const AvatorWindow = React.createClass({
+    getInitialState(){
+        return({
+            avatorInfo:this.props.avatorInfo,
+        })
+    },
+    render(){
+        console.log('avatorInfo state:',this.state)
+        return(
+                <div id="resizeBig">
+                    <div id="close">
+                        <p className='close'> × </p>
+                    </div>
+                    <img className='avator' width='150px' height='150px'/>
+                    <div className="desc">
+                        <ul>
+                            <li className='username'>
+                                <dt>姓名:</dt>
+                                {/* <dd> {this.state.avatorInfo.username}</dd> */}
+                                <dd> {this.props.avatorInfo.username}</dd>
+                            </li>
+                            <li className='age'>
+                                <dt>年龄:</dt>
+                                <dd> {this.props.avatorInfo.userAge}</dd>
+                            </li>
+                            <li className='school'>
+                                <dt>学校:</dt>
+                                <dd> {this.props.avatorInfo.userSchool}</dd>
+                            </li>
+                            <li className='addr'>
+                                <dt>现居地:</dt>
+                                <dd> {this.props.avatorInfo.userAddr}</dd>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        )
+    },
+    componentDidMount(){
+        
+    }
+})
+
 
 const Chats = React.createClass({
     getInitialState(){
@@ -143,34 +196,50 @@ const Chats = React.createClass({
                 userSchool:null,
             },
             chatInfo:{
-                    "roomid":null,
-                    "userid":"",
-                    "username":"",
-                    "msg":"chatInfo msg",
-                    "onlineUser":{}
-                }
+                "roomid":null,
+                "userid":"",
+                "username":"",
+                "msg":"chatInfo msg",
+                "onlineUser":{}
+            }
         })
     },
     handleChange(event){
 
     },
     chatInit(obj){
-        // var resultObj = Object.assign({chatInfo,obj})
-        // console.log({resultObj})
+        var chatInfo = this.state.chatInfo;
+        var resultObj = Object.assign({chatInfo,obj})
+        console.log({resultObj})
+        // Chat.init(obj);
+        // console.log('chatInit loginInfo:',this.state.loginInfo)
         Chat.init(obj);
+        // Chat.init(this.state.loginInfo);
     },
     getLoginInfo(obj){
         this.setState({loginInfo:obj})
+    },
+    getChatInfo(obj){
+        this.setState({chatInfo:obj});
     },
     render(){
         return(
             <div>
                 <LoginWindow loginInfo={this.state.loginInfo} setLoginInfo={this.getLoginInfo} chatInit={this.chatInit}/>
-                <ChatWindow/>
+                <ChatWindow chatInfo={this.state.chatInfo} setChatInfo={this.getChatInfo} />
+                {/*<AvatorWindow avatorInfo={this.state.loginInfo} />*/}
             </div>
         )
     },
     componentDidMount(){
+        function chatInit(obj){
+            var chatInfo = this.state.chatInfo;
+            var resultObj = Object.assign({chatInfo,obj})
+            console.log({resultObj})
+            // Chat.init(obj);
+            Chat.init(this.state.loginInfo);
+        }
+        chatInit.bind(this);
         
         
     },
