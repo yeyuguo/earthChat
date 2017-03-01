@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 const LoginWindow = React.createClass({
     getInitialState(){
         return {
-                loginUserObj:{},
+                loginUserObj:this.props.loginInfo
             }
     },
     handleClick(e){
@@ -15,7 +15,6 @@ const LoginWindow = React.createClass({
     },
     handleSubmit(e){
         e.preventDefault();
-
         var loginUserObj={}
         loginUserObj.username = ReactDOM.findDOMNode(this.refs.username).value
         loginUserObj.userAge = ReactDOM.findDOMNode(this.refs.userAge).value || '20'
@@ -28,7 +27,17 @@ const LoginWindow = React.createClass({
         }
         // console.log('loginUserObj:---',loginUserObj)
         this.setState({loginUserObj});
-        Chat.init(loginUserObj)
+        /*
+        千万千万千万千万千万千万千万千万 别做
+        this.props.setLoginInfo(this.state.loginUserObj)
+        因为 state 会在更新之后，立马又重新刷新一下该组件内容。
+        就会导致出现两次登录情况；
+        */
+        this.props.setLoginInfo(loginUserObj)
+
+        // 初始化 Chat.init() 函数
+        this.props.chatInit(loginUserObj)
+        
         $('#loginBox').hide();
         $('#loginBox input[type="text"]').val('');
         return false;
@@ -145,14 +154,19 @@ const Chats = React.createClass({
     handleChange(event){
 
     },
-    chatFuc(){
-
+    chatInit(obj){
+        // var resultObj = Object.assign({chatInfo,obj})
+        // console.log({resultObj})
+        Chat.init(obj);
+    },
+    getLoginInfo(obj){
+        this.setState({loginInfo:obj})
     },
     render(){
         return(
             <div>
-                <LoginWindow loginInfo={this.state.loginInfo}/>
-                <ChatWindow chatObj={this.chatFuc}/>
+                <LoginWindow loginInfo={this.state.loginInfo} setLoginInfo={this.getLoginInfo} chatInit={this.chatInit}/>
+                <ChatWindow/>
             </div>
         )
     },
