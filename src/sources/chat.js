@@ -168,7 +168,8 @@ var Chat = {
     },
     init: function(loginUserObj) {
         // 不在同一个域内的连接
-        Chat.socket = io.connect('ws://127.0.0.1:3001');
+        // Chat.socket = io.connect('ws://127.0.0.1:3001');
+        Chat.socket = io.connect('ws://10.9.33.80:3001');
         // Chat.socket = io.connect('ws://10.9.32.16:3001');
         // 在本地连接里才能使用
         // this.socket = io()

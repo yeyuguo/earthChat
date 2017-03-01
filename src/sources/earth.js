@@ -145,19 +145,25 @@ var Earth = function(w, d3) {
 
 
         //Redraw all items with new projections
+        var this_obj
         function redraw() {
             if (obj) {
-                // obj = {
+                
+                if(!this_obj){
+                    this_obj = obj;
+                }
+                
+                // this_obj = {
                 //     point: [116, 34],
                 //     msg: 'test'
                 // }
                 // 若存在回调函数 执行 回调函数
-                if (obj.action) {
-                    var fn = obj.action
-                    delete obj.action
-                    fn(obj)
+                if (this_obj.action) {
+                    var fn = this_obj.action
+                    delete this_obj.action
+                    fn(this_obj)
                 }
-                markPoint(obj)
+                markPoint(this_obj)
             }
 
             // markPoint([116, 34], '我变化咯')
@@ -227,8 +233,9 @@ var Earth = function(w, d3) {
                 return false
             }
             var peking = obj.point || [116.3, 39.9];
-            var textCont = obj.msg || '这是测试对话'
+            var textCont = obj.msg || ''
             var picSrc = obj.avatar || 'images/t2.png'
+
             var dialogBox = d3.select('#dialogBox')
 
             // var proPeking = initObj.projection(peking)
@@ -246,7 +253,7 @@ var Earth = function(w, d3) {
             if (picBox) {
                 picBox.remove();
             }
-
+            
             beijingPoint = dialogBox.append('circle')
                 .attr("cx", proPeking[0])
                 .attr("cy", proPeking[1])
@@ -279,10 +286,13 @@ var Earth = function(w, d3) {
             })
             var msgW = 100,
                 msgH = 30
-            if (obj.msg == '') {
-                msgW = 0
-                msgH = 0
-            }
+            // if (obj.msg == '') {
+            //     msgW = 0
+            //     msgH = 0
+            // }
+            msgW = 0
+            msgH = 0
+            
             PopupBox = dialogBox.append('rect')
                 .attr('class', 'Popup')
                 .attr('x', proPeking[0] + 1)
@@ -292,14 +302,15 @@ var Earth = function(w, d3) {
                 .attr('fill', 'white')
                 .attr('width', msgW)
                 .attr('height', msgH)
-                // .html(textCont)
 
             textBox = dialogBox.append('text')
                 .attr('class', 'Popup')
                 .attr('x', proPeking[0] + 5)
                 .attr('y', proPeking[1] + 20)
-                .html(textCont)
-
+                // .html(textCont)
+                .html('')
+            
+                
         }
 
         return {
@@ -318,13 +329,49 @@ var Earth = function(w, d3) {
         // 信息修改
         var selectObj = d3.select('#dialogBox')
         if (obj.msg) {
+            // selectObj.select('text')
+            //     .html(obj.msg)
+            
+            // 在地球仪上绘制一个对话框
+            var n=20
+            var width_msg = String(n-7)+'em';
+            var height_msg = String(Math.ceil(obj.msg.length/n)+1)+'em';
+            // console.log('---------')
+            // console.log(width_msg,height_msg)
+            d3.select('.Popup')
+                .attr('width',width_msg)
+                .attr('height',height_msg)
+            var line_str = wrap_cb(obj.msg,n)
+            console.log({line_str})
             selectObj.select('text')
-                .html(obj.msg)
+                .html(line_str)
         }
         // 图片修改
         if (obj.avatar) {
             selectObj.select('image')
                 .attr('xlink:href', obj.avatar)
+        }
+
+        function wrap_cb(str,len){
+            var str = str || ''
+            var str_len = str.length;
+            var len = len || 20
+            var n = Math.ceil(str_len/len);
+            var x_point = d3.select('.Popup').attr('x');
+            x_point = parseFloat(x_point)+10 
+            var y_point = d3.select('.Popup').attr('y');
+            var result = ''
+            for(var i=0;i<n;i++){
+                
+                
+                y_point = parseFloat(y_point) + 15
+                var line_str = `<tspan x="${x_point}" y="${y_point}">${str.substr(len*i,len)}</tspan>`
+                // console.log('y_point:',y_point,i)
+                // console.log(y_point+(i+1)*20)
+                result +=line_str
+            }
+            
+            return result
         }
     }
 

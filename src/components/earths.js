@@ -46,14 +46,15 @@ const Earths = React.createClass({
                 // redraw([lon, lat])
             var paramsObj = {
                     point: [lon, lat],
-                    msg: 'aaa',
+                    // msg: 'aa',
                     avatar: 'images/t2.png',
                 }
-                // paramsObj.point = [110, 30]
-                console.log({paramsObj})
-                Earth.redraw(paramsObj);
+            // paramsObj.point = [110, 30]
+            console.log({paramsObj})
+            Earth.redraw(paramsObj);
         })
-        
+       
+
     }
 })
 

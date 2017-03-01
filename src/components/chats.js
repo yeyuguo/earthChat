@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import List from 'antd-mobile/lib/list/index.web'
-import InputItem from 'antd-mobile/lib/input-item/index.web'
-import Button from 'antd-mobile/lib/button/index.web'
+
 import Flex from 'antd-mobile/lib/flex/index.web'
-import WingBlank from 'antd-mobile/lib/wing-blank/index.web'
 // import WhiteSpace from 'antd-mobile/lib/white-space/index.web'
 
 const LoginWindow = React.createClass({
@@ -219,7 +216,8 @@ const Chats = React.createClass({
                 "username":"",
                 "msg":"chatInfo msg",
                 "onlineUser":{}
-            }
+            },
+            msg:''
         })
     },
     handleChange(event){
