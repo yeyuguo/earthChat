@@ -37,7 +37,7 @@ class AppComponent extends React.Component {
       <div id="main">
         Main
         <div id="earth">
-          {/*< Earths  />*/}
+          < Earths  />
         </div>
         <div id="chat">
           < Chats />

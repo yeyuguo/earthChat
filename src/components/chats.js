@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 
 const LoginWindow = React.createClass({
     getInitialState(){
-        return(
-            {
-                loginInfo:this.props.loginInfo
+        return {
+                loginUserObj:{},
             }
-        )
     },
     handleClick(e){
         alert(1)
@@ -17,16 +15,24 @@ const LoginWindow = React.createClass({
     },
     handleSubmit(e){
         e.preventDefault();
+
         var loginUserObj={}
         loginUserObj.username = ReactDOM.findDOMNode(this.refs.username).value
-        loginUserObj.userAge = ReactDOM.findDOMNode(this.refs.userAge).value;
-        loginUserObj.userAddr = ReactDOM.findDOMNode(this.refs.userAddr).value;
-        loginUserObj.userSchool = ReactDOM.findDOMNode(this.refs.userSchool).value;
-        console.log('loginUserObj:---',loginUserObj)
+        loginUserObj.userAge = ReactDOM.findDOMNode(this.refs.userAge).value || '20'
+        loginUserObj.userAddr = ReactDOM.findDOMNode(this.refs.userAddr).value || '云南省昆明市'
+        loginUserObj.userSchool = ReactDOM.findDOMNode(this.refs.userSchool).value || '云南省昆明市'
+
+        if (!loginUserObj.username) {
+            var randomNum = parseInt(Math.random() * 10000)
+            loginUserObj.username = `懒鬼${randomNum}`
+        }
+        // console.log('loginUserObj:---',loginUserObj)
+        
+        this.setState({loginUserObj});
         Chat.init(loginUserObj)
         $('#loginBox').hide();
         $('#loginBox input[type="text"]').val('')
-        
+        console.log('this.state:',this.state);
         return false;
     },
     render(){
@@ -53,11 +59,11 @@ const LoginWindow = React.createClass({
                                     <input type="text" className="userSchool" placeholder="请输入学校" ref='userSchool'/>
                                 </li>
                                 <li>
-                                   <button >tijiao</button>
+                                   <input type="submit" value='提交'/>
                                 </li>
                             </ul>
                         </form>
-                       <button onClick={this.handleClick}>click</button>
+                      
 
                     </div>
                 </div>
