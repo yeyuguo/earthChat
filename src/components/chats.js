@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// import List from 'antd-mobile/lib/list/index.web'
+import InputItem from 'antd-mobile/lib/input-item/index.web'
+import Button from 'antd-mobile/lib/button/index.web'
+import Flex from 'antd-mobile/lib/flex/index.web'
+import WingBlank from 'antd-mobile/lib/wing-blank/index.web'
+// import WhiteSpace from 'antd-mobile/lib/white-space/index.web'
+
 const LoginWindow = React.createClass({
     getInitialState(){
         return {
@@ -36,9 +43,9 @@ const LoginWindow = React.createClass({
         this.props.setLoginInfo(loginUserObj)
 
         // 初始化 Chat.init() 函数
-        console.log(loginUserObj)
+        
         this.props.chatInit(loginUserObj)
-        console.log('loginUserObj:',this.state.loginUserObj)
+        // console.log('loginUserObj:',this.state.loginUserObj)
         $('#loginBox').hide();
         $('#loginBox input[type="text"]').val('');
         return false;
@@ -134,11 +141,17 @@ const ChatWindow = React.createClass({
                 </div>
                 <div id="inputBox">
                     <form>
+                        <Flex>
+                            <input type="text" className='inputDia'/>
+                            <input type="submit" value="发送" className="sendBtn"/>   
+                        </Flex>
+                        {/*
                         <input type="text" className='inputDia'/>
                         <input type="submit" value="发送" className="sendBtn"/>
+                        */}
                     </form>
                 </div>
-            </div>
+            </div> 
         )
     },
     componentDidMount(){
@@ -153,7 +166,7 @@ const AvatorWindow = React.createClass({
         })
     },
     render(){
-        console.log('avatorInfo state:',this.state)
+        // console.log('avatorInfo state:',this.state)
         return(
                 <div id="resizeBig">
                     <div id="close">
@@ -215,7 +228,7 @@ const Chats = React.createClass({
     chatInit(obj){
         var chatInfo = this.state.chatInfo;
         var resultObj = Object.assign({chatInfo,obj})
-        console.log({resultObj})
+        // console.log({resultObj})
         // Chat.init(obj);
         // console.log('chatInit loginInfo:',this.state.loginInfo)
         Chat.init(obj);
@@ -237,15 +250,6 @@ const Chats = React.createClass({
         )
     },
     componentDidMount(){
-        function chatInit(obj){
-            var chatInfo = this.state.chatInfo;
-            var resultObj = Object.assign({chatInfo,obj})
-            console.log({resultObj})
-            // Chat.init(obj);
-            Chat.init(this.state.loginInfo);
-        }
-        chatInit.bind(this);
-        
         
     },
         

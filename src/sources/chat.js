@@ -176,7 +176,7 @@ var Chat = {
 
         Chat.username = loginUserObj.username
         Chat.loginUserObj = loginUserObj
-        console.log('Chat.loginUserObj:',Chat.loginUserObj)
+        // console.log('Chat.loginUserObj:',Chat.loginUserObj)
             // Chat.username = username || 'yeyuguo'
             // Chat.username = 'yeyuguo' + this.userid.substr(-4, 4)
         this.clientSend()
@@ -230,7 +230,7 @@ var Chat = {
         }
         return {
             onceHandle: function() {
-                
+
             }(),
             closeAvator: closeAvator,
             openAvator: openAvator,
