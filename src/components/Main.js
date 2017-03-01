@@ -36,11 +36,11 @@ class AppComponent extends React.Component {
     return (
       <div id="main">
         Main
-        <div id="earth">
-          < Earths  />
-        </div>
         <div id="chat">
           < Chats />
+        </div>
+        <div id="earth">
+          < Earths  />
         </div>
       </div>
       

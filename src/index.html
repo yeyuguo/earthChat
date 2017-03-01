@@ -55,25 +55,25 @@
 
             // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
             // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
-            var ip = returnCitySN.cip || '61.51.81.123'
-            Common.getAjax({
-                    url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' + ip,
-                    dataType: 'jsonp'
-                }, function(result) {
-                    var lonlat = result.content.point
-                    var lon = lonlat.x
-                    var lat = lonlat.y
-                    console.log(redraw)
-                        // redraw([lon, lat])
-                    var paramsObj = {
-                            point: [lon, lat],
-                            msg: 'aaa',
-                            avatar: 'images/t2.png',
-                        }
-                        // paramsObj.point = [110, 30]
-                        // Earth.redraw(paramsObj);
-                })
-                // 地球仪显示 信息
+            // var ip = returnCitySN.cip || '61.51.81.123'
+            // Common.getAjax({
+            //         url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' + ip,
+            //         dataType: 'jsonp'
+            //     }, function(result) {
+            //         var lonlat = result.content.point
+            //         var lon = lonlat.x
+            //         var lat = lonlat.y
+            //         console.log(redraw)
+            //             // redraw([lon, lat])
+            //         var paramsObj = {
+            //                 point: [lon, lat],
+            //                 msg: 'aaa',
+            //                 avatar: 'images/t2.png',
+            //             }
+            //             // paramsObj.point = [110, 30]
+            //             // Earth.redraw(paramsObj);
+            //     })
+            // 地球仪显示 信息
             var testObj = {
                 msg: 'lalalalala',
                 point: [130, 24],

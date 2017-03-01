@@ -35,12 +35,30 @@ const Earths = React.createClass({
             </svg>`
         $('#earth').before(blueLand)
         //地球仪和星空
-        var paramsObj = {
-            point: [116, 35],
-            msg: 'aaa',
-            avatar: '../images/t2.png',
-        }
-        Earth.redraw(paramsObj);
+        var ip = returnCitySN.cip || '61.51.81.123'
+        Common.getAjax({
+                url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' + ip,
+                dataType: 'jsonp'
+            }, function(result) {
+                var lonlat = result.content.point
+                var lon = lonlat.x
+                var lat = lonlat.y
+                    // redraw([lon, lat])
+                var paramsObj = {
+                        point: [lon, lat],
+                        msg: 'aaa',
+                        avatar: 'images/t2.png',
+                    }
+                    // paramsObj.point = [110, 30]
+                    console.log({paramsObj})
+                    Earth.redraw(paramsObj);
+            })
+        // var paramsObj = {
+        //     point: [116, 35],
+        //     msg: 'aaa',
+        //     avatar: '../images/t2.png',
+        // }
+        // Earth.redraw(paramsObj);
     }
 })
 

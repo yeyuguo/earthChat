@@ -27,12 +27,10 @@ const LoginWindow = React.createClass({
             loginUserObj.username = `懒鬼${randomNum}`
         }
         // console.log('loginUserObj:---',loginUserObj)
-        
         this.setState({loginUserObj});
         Chat.init(loginUserObj)
         $('#loginBox').hide();
-        $('#loginBox input[type="text"]').val('')
-        console.log('this.state:',this.state);
+        $('#loginBox input[type="text"]').val('');
         return false;
     },
     render(){
@@ -107,7 +105,7 @@ const ChatWindow = React.createClass({
                 </div>
                 <div id="inputBox">
                     <form>
-                        <input type="text" name="" value="" className='inputDia'/>
+                        <input type="text" className='inputDia'/>
                         <input type="submit" value="发送" className="sendBtn"/>
                     </form>
                 </div>
@@ -139,7 +137,7 @@ const Chats = React.createClass({
         return(
             <div>
                 <LoginWindow loginInfo={this.loginInfo}/>
-                {/*<ChatWindow />*/}
+                <ChatWindow />
             </div>
         )
     },
