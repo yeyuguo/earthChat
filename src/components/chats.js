@@ -84,19 +84,19 @@ const LoginWindow = React.createClass({
                         <ul>
                             <li className='username'>
                                 <dt>姓名:</dt>
-                                <dd> </dd>
+                                <dd> {this.props.loginInfo.username}</dd>
                             </li>
                             <li className='age'>
                                 <dt>年龄:</dt>
-                                <dd> </dd>
+                                <dd> {this.props.loginInfo.userAge}</dd>
                             </li>
                             <li className='school'>
                                 <dt>学校:</dt>
-                                <dd></dd>
+                                <dd> {this.props.loginInfo.userSchool}</dd>
                             </li>
                             <li className='addr'>
                                 <dt>现居地:</dt>
-                                <dd> </dd>
+                                <dd> {this.props.loginInfo.userAddr}</dd>
                             </li>
                         </ul>
                     </div>
@@ -112,6 +112,11 @@ const LoginWindow = React.createClass({
                 obj.css('display', 'none');
             }
         });
+        // 拖拽功能
+        var clickSlide = document.getElementById('close')
+        var moveSlide = document.getElementById('resizeBig')
+        Common.dragMove(clickSlide, moveSlide)
+
     }
 })
 

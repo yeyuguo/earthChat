@@ -230,19 +230,7 @@ var Chat = {
         }
         return {
             onceHandle: function() {
-                // 拖拽功能
-                var clickSlide = document.getElementById('close')
-                var moveSlide = document.getElementById('resizeBig')
-                // Common.dragMove(clickSlide, moveSlide)
-                // $('.close').on('click', function() {
-                //     // alert(00)
-                //     closeAvator($('#resizeBig'));
-                // });
-
-                // 登录
-                // Chat.UserLogin();
-
-
+                
             }(),
             closeAvator: closeAvator,
             openAvator: openAvator,
