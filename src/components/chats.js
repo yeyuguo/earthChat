@@ -98,6 +98,11 @@ const LoginWindow = React.createClass({
 
 
 const ChatWindow = React.createClass({
+    getInitialState(){
+        return {
+                chatObj:{},
+            }
+    },
     render(){
         return(
             <div>
@@ -111,6 +116,9 @@ const ChatWindow = React.createClass({
                 </div>
             </div>
         )
+    },
+    componentDidMount(){
+        
     }
 })
 
@@ -126,24 +134,33 @@ const Chats = React.createClass({
                 userSchool:null,
             },
             chatInfo:{
-
-            }
+                    "roomid":null,
+                    "userid":"",
+                    "username":"",
+                    "msg":"chatInfo msg",
+                    "onlineUser":{}
+                }
         })
     },
     handleChange(event){
 
     },
+    chatFuc(){
+
+    },
     render(){
         return(
             <div>
-                <LoginWindow loginInfo={this.loginInfo}/>
-                <ChatWindow />
+                <LoginWindow loginInfo={this.state.loginInfo}/>
+                <ChatWindow chatObj={this.chatFuc}/>
             </div>
         )
     },
     componentDidMount(){
         
-    }
+        
+    },
+        
 })
 
 

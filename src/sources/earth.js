@@ -300,12 +300,6 @@ var Earth = function(w, d3) {
                 .attr('y', proPeking[1] + 20)
                 .html(textCont)
 
-
-
-
-
-
-
         }
 
         return {

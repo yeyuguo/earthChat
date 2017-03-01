@@ -35,7 +35,7 @@ class AppComponent extends React.Component {
   render() {
     return (
       <div id="main">
-        Main
+        
         <div id="chat">
           < Chats />
         </div>
