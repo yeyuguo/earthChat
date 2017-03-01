@@ -187,10 +187,10 @@ li dl dd {
 }
 #chatDiv {
   position: absolute;
-  width: 90%;
-  height: 85%;
+  width: 95%;
+  height: 98%;
   overflow: auto;
-  padding: 5px 10px;
+  padding: 2%;
 }
 #chatDiv p {
   background: #fff;
