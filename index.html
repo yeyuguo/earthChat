@@ -30,16 +30,14 @@
                 <stop offset="100%" style="stop-color:#0099FF;stop-opacity:1" />
             </linearGradient>
             <filter id="glow">
-                <feColorMatrix type="matrix"
-                    values=
-                    "0 0 0 0   0
+                <feColorMatrix type="matrix" values="0 0 0 0   0
                      0 0 0 0.9 0 
                      0 0 0 0.9 0 
-                     0 0 0 1   0"/>
-                <feGaussianBlur stdDeviation="5.5" result="coloredBlur"/>
+                     0 0 0 1   0" />
+                <feGaussianBlur stdDeviation="5.5" result="coloredBlur" />
                 <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
                 </feMerge>
             </filter>
         </defs>
@@ -120,26 +118,29 @@
 
     <script>
         Chat.init('yeyuguo')
-            // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
-            // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
+        // TODO，为解决地球仪和对话框的上下层级问题，暂计划手势控制；
+        // 两指合拢，把地球仪的z-index放下面，两指拉伸，地球仪的z-index 浮上来
         var ip = returnCitySN.cip || '61.51.81.123'
         Common.getAjax({
-            url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' + ip,
+            url: 'http://api.map.baidu.com/location/ip?&coor=bd09ll&ak=sGKjmnRedwEAgCQ2OWlOMGuqKkTpneED&ip=' +
+                ip,
             dataType: 'jsonp'
-        }, function(result) {
+        }, function (result) {
             var lonlat = result.content.point
             var lon = lonlat.x
             var lat = lonlat.y
             console.log(redraw)
-                // redraw([lon, lat])
+            // redraw([lon, lat])
             var paramsObj = {
-                    point: [lon, lat],
-                    msg: 'aa',
-                    avatar: 'images/t2.png',
-                }
-                // paramsObj.point = [110, 30]
+                point: [lon, lat],
+                msg: '每次拖拽都会被重置，被 Earth.redraw() 触发的',
+                avatar: 'images/t2.png',
+            }
+            // paramsObj.point = [110, 30]
+            // !每次重绘都会触发该对象
             Earth.redraw(paramsObj);
         })
+        // 由于 ajax 里的回调，该步骤会被覆盖
         var testObj = {
             msg: 'lalalalala',
             point: [130, 24],

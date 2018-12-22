@@ -25,16 +25,16 @@ var Chat = {
     username: null,
     userid: null,
     socket: null,
-    genUid: function() {
+    genUid: function () {
         return new Date().getTime() + "" + Math.floor(Math.random() * 899 + 100);
     },
-    scrollBottom: function(obj) {
+    scrollBottom: function (obj) {
         var obj = obj || 'chatDiv'
         var getObj = document.getElementById(obj) || document.getElementsByClassName(obj) || document.getElementsByTagName(obj)
         getObj.scrollTop = getObj.scrollHeight
     },
     // 发送消息
-    submit: function() {
+    submit: function () {
         var msg = $('.inputDia').val()
         if (msg == '') {
             return false;
@@ -47,17 +47,18 @@ var Chat = {
             msg: msg
         }
         Chat.socket.emit('client send', clientObj)
+
         $('.inputDia').val('')
     },
-    clientSend: function() {
-        $('#inputBox form').submit(function() {
+    clientSend: function () {
+        $('#inputBox form').submit(function () {
             Chat.submit();
             // 如果不加 false 页面会跳转
             return false;
         })
     },
-    serverSend: function() {
-        Chat.socket.on('server send', function(serverObj) {
+    serverSend: function () {
+        Chat.socket.on('server send', function (serverObj) {
             var chatObj = {}
             console.log('server send obj is :', serverObj)
             chatObj.msg = serverObj.msg
@@ -76,7 +77,15 @@ var Chat = {
                 chatObj.avatar = 'images/t2.png'
                 chatObj.className = 'other'
                 chatObj.alt = '别人'
-                    // Chat.renderMsg('other', serverObj.msg)
+                // Chat.renderMsg('other', serverObj.msg)
+                // 地球仪显示信息
+                let testObj = {
+                    msg: 'dfsf',
+                    point: [130, 24],
+                    avatar: 'images/t2.png'
+                }
+                testObj.msg = chatObj.msg
+                Earth.markMsg(testObj)
             }
             // console.log('chatObj:', chatObj)
             Chat.renderMsg(chatObj);
@@ -91,15 +100,15 @@ var Chat = {
 
         })
     },
-    renderMsg: function(chatObj) {
+    renderMsg: function (chatObj) {
         // $('#chatDiv').append(`<p class=${obj}>${msg}</p>`)
         var chatObj = chatObj
-            //  || {
-            //     avatar: 'images/t1.jpg',
-            //     className: 'myself',
-            //     alt: null,
-            //     msg: 'nihao',
-            // }
+        //  || {
+        //     avatar: 'images/t1.jpg',
+        //     className: 'myself',
+        //     alt: null,
+        //     msg: 'nihao',
+        // }
         if (!chatObj.msg) {
             return false;
         }
@@ -125,8 +134,8 @@ var Chat = {
 
         }
         $('#chatDiv').append(chatDOM)
-            // 添加点击事件
-        $('#chatDiv section > span').on('click', 'img', function() {
+        // 添加点击事件
+        $('#chatDiv section > span').on('click', 'img', function () {
             // alert(1)
             var src = $(this).attr('src')
             console.log('src:', src)
@@ -142,14 +151,14 @@ var Chat = {
         })
         this.scrollBottom()
     },
-    exitChat: function() {
-        this.socket.on('disconnect', function(onlineUser) {
+    exitChat: function () {
+        this.socket.on('disconnect', function (onlineUser) {
             this.onlineUser = onlineUser
             Chat.onlineUser = onlineUser
             console.log('现有剩下的用户：', onlineUser)
         })
     },
-    init: function(username) {
+    init: function (username) {
         // 不在同一个域内的连接
         // Chat.socket = io.connect('ws://127.0.0.1:3001');
         // 在同一个域内的连接
@@ -163,7 +172,7 @@ var Chat = {
         this.exitChat()
 
     },
-    position: function(ip) {
+    position: function (ip) {
 
     }
 }

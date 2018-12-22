@@ -1,4 +1,4 @@
-var Common = function() {
+var Common = function () {
 
 
     /*封装ajax的设置*/
@@ -20,27 +20,27 @@ var Common = function() {
         }
         option['dataType'] = option['dataType'] || 'text';
         $.ajax({
-                url: option['url'],
-                async: option['async'] || true,
-                type: option['type'] || 'get',
-                timeout: option['timeout'] ? parseInt(option['timeout']) : 1000 * 30,
-                data: option['data'] || '',
-                dataType: option['dataType'],
-                beforeSend: option['beforeSend'] || null
-            })
-            .done(option['success'] ? option['success'] : function(data, textStatus) {
+            url: option['url'],
+            async: option['async'] || true,
+            type: option['type'] || 'get',
+            timeout: option['timeout'] ? parseInt(option['timeout']) : 1000 * 30,
+            data: option['data'] || '',
+            dataType: option['dataType'],
+            beforeSend: option['beforeSend'] || null
+        })
+            .done(option['success'] ? option['success'] : function (data, textStatus) {
                 console.log('ajax请求成功返回!');
                 if (fn) {
                     fn(data);
                 }
             })
-            .fail(option['error'] ? option['error'] : function(XMLHttpRequest, textStatus, errorThrown) {
+            .fail(option['error'] ? option['error'] : function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log('ajax请求执行出错!');
                 console.log(XMLHttpRequest);
                 console.log(textStatus);
                 console.log(errorThrown);
             })
-            .always(option['complete'] ? option['complete'] : function(XMLHttpRequest, textStatus) {
+            .always(option['complete'] ? option['complete'] : function (XMLHttpRequest, textStatus) {
 
             });
     }
@@ -54,7 +54,7 @@ var Common = function() {
         var defer = $.Deferred();
         var urlParams = {}
         var path, params, url
-        if (typeof(allPath) != 'object') {
+        if (typeof (allPath) != 'object') {
             var splitPath = allPath.split('?')
             path = splitPath[0]
             params = splitPath[1].split('&')
@@ -66,7 +66,7 @@ var Common = function() {
             }
 
         }
-        if (typeof(allPath) == 'object') {
+        if (typeof (allPath) == 'object') {
             if (allPath.hasOwnProperty('action')) {
                 path = allPath.action
                 delete allPath.action
@@ -87,10 +87,10 @@ var Common = function() {
             dataType: allPath.dataType || 'json',
             type: 'GET',
             data: urlParams,
-            success: function(data) {
+            success: function (data) {
                 var data
                 console.log(data)
-                if (typeof(data) == 'string') {
+                if (typeof (data) == 'string') {
                     data = JSON.parse(data)
                 }
 
@@ -107,7 +107,7 @@ var Common = function() {
                 }
                 // console.log('data:',data);
             },
-            error: function(err) {
+            error: function (err) {
                 console.log('err:', err)
                 defer.reject(err)
             }
@@ -120,7 +120,7 @@ var Common = function() {
         var defer = $.Deferred();
         var urlParams = {}
         var path, params, url
-        if (typeof(allPath) != 'object') {
+        if (typeof (allPath) != 'object') {
             var splitPath = allPath.split('?')
             path = splitPath[0]
             params = splitPath[1].split('&')
@@ -130,7 +130,7 @@ var Common = function() {
             }
         }
 
-        if (typeof(allPath) == 'object') {
+        if (typeof (allPath) == 'object') {
             if (allPath.hasOwnProperty('action')) {
                 path = allPath.action
                 delete allPath.action
@@ -152,13 +152,13 @@ var Common = function() {
             //     "module": 'programlist',
             //     "data": '{"progname": "11","owner": "11","progaddr": "11","wttype": "11","powcap": "11","gradtime": "11","proleader": "11","createtime": "11","wfid": "11","progid": "13"}'
             // },
-            success: function(data) {
+            success: function (data) {
                 console.log(this.data)
                 var data
                 console.log('---------->')
-                console.log(data, typeof(data))
+                console.log(data, typeof (data))
                 console.log('---------->')
-                if (typeof(data) == 'string') {
+                if (typeof (data) == 'string') {
                     data = JSON.parse(data)
                 }
                 if (fn) {
@@ -178,7 +178,7 @@ var Common = function() {
     /*
     深复制
     */
-    var cloneObj = function(obj) {
+    var cloneObj = function (obj) {
         var str, newobj = obj.constructor === Array ? [] : {};
         if (typeof obj !== 'object') {
             return;
@@ -201,16 +201,11 @@ var Common = function() {
     return {
         test: 'test',
         url: null,
-        getAjax: function(a, b) {
-            get_request(a, b)
-                // if (!this.url) {
-                //     get_request(obj);
-                // }
-        },
-        postAjax: function(obj) {
+        getAjax: get_request,
+        postAjax: function (obj) {
             post_request(obj);
         },
-        cloneObj: function(obj) {
+        cloneObj: function (obj) {
             cloneObj(obj);
         },
 
